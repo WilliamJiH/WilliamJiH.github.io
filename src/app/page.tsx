@@ -1,103 +1,73 @@
-import Image from "next/image";
+'use client';
+
+import { Spotlight } from '@/components/ui/spotlight';
+import Typewriter from 'typewriter-effect';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className='h-screen w-full rounded-md flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden'>
+      <Spotlight className='-top-40 left-0 md:left-60 md:-top-20' fill='white' />
+      <div className='p-4 max-w-7xl mx-auto relative z-10 w-full pt-20 md:pt-0'>
+        <div className='text-center'>
+          <h1 className='text-3xl md:text-6xl font-normal'>
+            <span className='bg-clip-text text-transparent bg-gradient-to-b from-purple-300 via-purple-500 to-purple-700'>
+              Hello
+            </span>
+            <span className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400'>
+              , Welcome to my website!
+            </span>
+          </h1>
+          <h1 className='text-3xl md:text-5xl font-normal mt-6'>
+            <span className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400'>
+              I'm{' '}
+            </span>
+            <span className='bg-clip-text text-transparent bg-gradient-to-b from-purple-300 via-purple-500 to-purple-700'>
+              Haohua (William) Ji
+            </span>
+          </h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <div className='mt-6 text-2xl md:text-4xl flex justify-center items-center'>
+            <span className='bg-clip-text text-transparent bg-gradient-to-b from-green-400 to-green-600 mr-1'>&gt;</span>
+            <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400'>
+              <Typewriter
+                options={{
+                  strings: [
+                    'Full-stack Web Developer',
+                    'Quantitative Financial Analyst',
+                    'CS Grad from University of Toronto',
+                    'Co-Founder of Campus Eats',
+                  ],
+                  autoStart: true,
+                  loop: true,
+                  delay: 75,
+                  deleteSpeed: 75,
+                  cursor: '_',
+                }}
+              />
+            </div>
+          </div>
+          
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      
+      <div className='absolute bottom-8 left-1/2 transform -translate-x-1/2'>
+        <div className='animate-bounce'>
+          <div 
+            className='w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center cursor-pointer hover:border-white/60 hover:bg-white/10 transition-all duration-300'
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          >
+            <svg 
+              className='w-6 h-6 text-white'
+              fill='none' 
+              stroke='currentColor' 
+              viewBox='0 0 24 24'
+              strokeWidth='2'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' d='M12 5v14m7-7l-7 7-7-7' />
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
