@@ -26,11 +26,25 @@ export const Spotlight = ({ className, fill }: SpotlightProps) => {
           rx="1924.71"
           ry="273.501"
           transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
-          fill={fill || "white"}
-          fillOpacity="0.21"
+          fill="url(#gradient)"
+          fillOpacity="0.35"
         ></ellipse>
       </g>
       <defs>
+        <linearGradient
+          id="gradient"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="100%"
+          gradientUnits="objectBoundingBox"
+        >
+          <stop offset="0%" stopColor="#8B5CF6" />
+          <stop offset="25%" stopColor="#A855F7" />
+          <stop offset="50%" stopColor="#EC4899" />
+          <stop offset="75%" stopColor="#F59E0B" />
+          <stop offset="100%" stopColor="#10B981" />
+        </linearGradient>
         <filter
           id="filter"
           x="0.860352"

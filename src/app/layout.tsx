@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { MyFloatingDock } from "@/components/floating-dock";
-
-const poppins = Poppins({
-  weight: ['400'],
-  style: ['normal'],
-  subsets: ["latin"],
-  variable: "--font-poppins",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,9 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.variable} font-poppins antialiased`}
-      >
+      <body className={`${GeistSans.variable} ${GeistSans.className} antialiased`}>
         {children}
         <MyFloatingDock />
       </body>

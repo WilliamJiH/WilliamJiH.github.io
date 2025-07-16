@@ -8,9 +8,16 @@ export function MyFloatingDock() {
   const [isVisible, setIsVisible] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const scrollTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
@@ -51,7 +58,7 @@ export function MyFloatingDock() {
         clearTimeout(scrollTimerRef.current);
       }
     };
-  }, [lastScrollY, isHovered]);
+  }, [lastScrollY, isHovered, isMounted]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -88,14 +95,20 @@ export function MyFloatingDock() {
     {
       title: 'LinkedIn',
       icon: <IconBrandLinkedin className='h-full w-full text-neutral-500 dark:text-neutral-300' />,
-      href: '#',
+      href: 'https://www.linkedin.com/in/williamji/',
+      target: '_blank',
     },
     {
       title: 'GitHub',
       icon: <IconBrandGithub className='h-full w-full text-neutral-500 dark:text-neutral-300' />,
-      href: '#',
+      href: 'https://github.com/WilliamJiH',
+      target: '_blank',
     },
   ];
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <div
