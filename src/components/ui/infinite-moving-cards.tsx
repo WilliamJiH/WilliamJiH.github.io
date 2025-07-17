@@ -85,7 +85,7 @@ export const InfiniteMovingCards = ({
       <ul
         ref={scrollerRef}
         className={cn(
-          "flex min-w-full shrink-0 gap-2 py-4 w-max flex-nowrap",
+          "flex min-w-full shrink-0 gap-2 w-max flex-nowrap",
           start && "animate-scroll ",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
@@ -99,7 +99,7 @@ export const InfiniteMovingCards = ({
             >
               <div className="relative z-20 flex items-center justify-center">
                 <IconComponent className="text-4xl text-neutral-300" />
-                <span className="text-xl font-medium text-neutral-300 ml-4" style={{ fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif' }}>
+                <span className="text-xl font-medium text-neutral-300 ml-4" style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}>
                   {item.name}
                 </span>
               </div>
