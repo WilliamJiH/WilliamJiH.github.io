@@ -3,10 +3,9 @@
 import { Spotlight } from '@/components/ui/spotlight';
 import LoadingWrapper from '@/components/loading-wrapper';
 import { HypertextReveal } from '@/components/ui/hypertext';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
-import { CardSpotlight } from '@/components/ui/card-spotlight';
 
 export default function Home() {
   const [currentSentence, setCurrentSentence] = useState(0);
@@ -26,7 +25,7 @@ export default function Home() {
     'Moving fast. Breaking nothing.',
   ];
 
-  const cycleSentences = () => {
+  const cycleSentences = useCallback(() => {
     setShowSentence(true);
 
     setTimeout(() => {
@@ -35,9 +34,9 @@ export default function Home() {
       setTimeout(() => {
         setCurrentSentence((prev) => (prev + 1) % sentences.length);
         cycleSentences();
-      }, 2000); // Wait 2s for fade out to complete
-    }, 4000); // Show for 4s
-  };
+      }, 1500); // Wait 1s for fade out to complete
+    }, 4000); // Show for 5s (1s fade-in + 4s fully visible)
+  }, [sentences.length]);
 
   useEffect(() => {
     const startSentences = setTimeout(() => {
@@ -168,7 +167,7 @@ export default function Home() {
                   key={currentSentence}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: showSentence ? 1 : 0 }}
-                  transition={{ duration: 2, ease: 'easeInOut' }}
+                  transition={{ duration: 1, ease: 'easeInOut' }}
                   className='h-8 md:h-12 flex items-center justify-center text-neutral-300 text-center'
                 >
                   {sentences[currentSentence]}
@@ -263,12 +262,13 @@ export default function Home() {
               {/* Right Section - Combined Paragraphs */}
               <div className='flex-1 relative max-w-2xl'>
                 {/* Vertical Progress Line */}
-                <div className='absolute right-0 top-0 bottom-0 w-1 bg-neutral-800 rounded-full hidden lg:block'>
+                <div className='absolute right-0 top-0 bottom-0 w-0.5 bg-neutral-800 rounded-full hidden lg:block'>
                   <div
-                    className='bg-gradient-to-b from-purple-500 via-blue-500 to-green-500 rounded-full transition-all duration-300 ease-out'
+                    className='rounded-full transition-all duration-300 ease-out'
                     style={{
                       height: `${homePageProgress * 100}%`,
                       width: '100%',
+                      background: 'linear-gradient(to bottom, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
                     }}
                   />
                 </div>
@@ -276,114 +276,65 @@ export default function Home() {
                   <p
                     className='text-base sm:text-lg md:text-xl lg:text-base xl:text-lg text-neutral-300 leading-relaxed text-justify mb-8 lg:mb-10'
                     style={{
-                      fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                      fontFamily: 'var(--font-poppins), system-ui, sans-serif !important',
                     }}
                   >
-                    {(() => {
-                      const text =
-                        "I'm William (Haohua) Ji. I recently graduate from the University of Toronto (June 2025) with a double major in Computer Science and Statistics. I currently work at CIBC Mellon and pursue a CFA Level I. Previously, I worked as a Performance Test Analyst at CIBC and co-founded Campus Eats, a student-focused food delivery platform that helped local vendors grow.";
-                      const highlights = [
-                        {
-                          text: 'CIBC Mellon and pursue a CFA Level I',
-                          start: text.indexOf('CIBC Mellon and pursue a CFA Level I'),
-                        },
-                        {
-                          text: 'Performance Test Analyst at CIBC',
-                          start: text.indexOf('Performance Test Analyst at CIBC'),
-                        },
-                        { text: 'co-founded Campus Eats', start: text.indexOf('co-founded Campus Eats') },
-                      ];
-
-                      return text.split('').map((char, index) => {
-                        const totalChars = 364;
-                        const charProgress =
-                          scrollDirection === 'up'
-                            ? aboutSectionProgress
-                            : Math.max(0, Math.min(1, (aboutSectionProgress * totalChars - index) / 5));
-
-                        const isHighlighted = highlights.some(
-                          (highlight) => index >= highlight.start && index < highlight.start + highlight.text.length
-                        );
-
-                        return (
-                          <span
-                            key={index}
-                            className={isHighlighted ? 'font-bold bg-clip-text text-transparent' : ''}
-                            style={{
-                              filter:
-                                scrollDirection === 'up' ? 'blur(0px)' : `blur(${Math.max(0, 5 - charProgress * 5)}px)`,
-                              opacity: Math.max(0.2, charProgress),
-                              transition: 'filter 0.3s ease, opacity 0.3s ease',
-                              ...(isHighlighted && {
-                                backgroundImage: 'linear-gradient(45deg, #10b981, #3b82f6, #8b5cf6, #ec4899)',
-                                backgroundSize: '200% 200%',
-                                animation: 'aurora 6s ease-in-out infinite',
-                              }),
-                            }}
-                          >
-                            {char}
-                          </span>
-                        );
-                      });
-                    })()}
+                    I'm William (Haohua) Ji. I recently graduate from the University of Toronto (June 2025) with a
+                    double major in Computer Science and Statistics. I currently work at{' '}
+                    <span
+                      className='font-bold bg-clip-text text-transparent'
+                      style={{
+                        backgroundImage: 'linear-gradient(45deg, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
+                        backgroundSize: '200% 200%',
+                        animation: 'aurora 6s ease-in-out infinite',
+                      }}
+                    >
+                      CIBC Mellon and pursue a CFA Level I
+                    </span>
+                    . Previously, I worked as a{' '}
+                    <span
+                      className='font-bold bg-clip-text text-transparent'
+                      style={{
+                        backgroundImage: 'linear-gradient(45deg, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
+                        backgroundSize: '200% 200%',
+                        animation: 'aurora 6s ease-in-out infinite',
+                      }}
+                    >
+                      Performance Test Analyst at CIBC
+                    </span>{' '}
+                    and{' '}
+                    <span
+                      className='font-bold bg-clip-text text-transparent'
+                      style={{
+                        backgroundImage: 'linear-gradient(45deg, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
+                        backgroundSize: '200% 200%',
+                        animation: 'aurora 6s ease-in-out infinite',
+                      }}
+                    >
+                      co-founded Campus Eats
+                    </span>
+                    , a student-focused food delivery platform that helped local vendors grow.
                   </p>
 
                   <p
                     className='text-base sm:text-lg md:text-xl lg:text-base xl:text-lg text-neutral-300 leading-relaxed text-justify'
                     style={{
-                      fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                      fontFamily: 'var(--font-poppins), system-ui, sans-serif !important',
                     }}
                   >
-                    {(() => {
-                      const text =
-                        'I am expertise in Full-Stack Web Development, Software Business, and UI/UX Design. Besides, I am actively contributing to a diverse range of 10+ projects, software business startups, and more.';
-                      const highlights = [
-                        {
-                          text: 'Full-Stack Web Development, Software Business, and UI/UX Design',
-                          start: text.indexOf('Full-Stack Web Development, Software Business, and UI/UX Design'),
-                        },
-                      ];
-
-                      return text.split('').map((char, index) => {
-                        const firstParagraphLength = 364;
-                        const totalChars = 227;
-                        const adjustedIndex = index + firstParagraphLength + 20;
-                        const charProgress =
-                          scrollDirection === 'up'
-                            ? aboutSectionProgress
-                            : Math.max(
-                                0,
-                                Math.min(
-                                  1,
-                                  (aboutSectionProgress * (firstParagraphLength + totalChars + 20) - adjustedIndex) / 5
-                                )
-                              );
-
-                        const isHighlighted = highlights.some(
-                          (highlight) => index >= highlight.start && index < highlight.start + highlight.text.length
-                        );
-
-                        return (
-                          <span
-                            key={index}
-                            className={isHighlighted ? 'font-bold bg-clip-text text-transparent' : ''}
-                            style={{
-                              filter:
-                                scrollDirection === 'up' ? 'blur(0px)' : `blur(${Math.max(0, 5 - charProgress * 5)}px)`,
-                              opacity: Math.max(0.2, charProgress),
-                              transition: 'filter 0.3s ease, opacity 0.3s ease',
-                              ...(isHighlighted && {
-                                backgroundImage: 'linear-gradient(45deg, #10b981, #3b82f6, #8b5cf6, #ec4899)',
-                                backgroundSize: '200% 200%',
-                                animation: 'aurora 6s ease-in-out infinite',
-                              }),
-                            }}
-                          >
-                            {char}
-                          </span>
-                        );
-                      });
-                    })()}
+                    I am expertise in{' '}
+                    <span
+                      className='font-bold bg-clip-text text-transparent'
+                      style={{
+                        backgroundImage: 'linear-gradient(45deg, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
+                        backgroundSize: '200% 200%',
+                        animation: 'aurora 6s ease-in-out infinite',
+                      }}
+                    >
+                      Full-Stack Web Development, Software Business, and UI/UX Design
+                    </span>
+                    . Besides, I am actively contributing to a diverse range of 10+ projects, software business
+                    startups, and more.
                   </p>
                 </div>
               </div>
