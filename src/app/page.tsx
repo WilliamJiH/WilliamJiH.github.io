@@ -4,9 +4,43 @@ import { Spotlight } from '@/components/ui/spotlight';
 import LoadingWrapper from '@/components/loading-wrapper';
 import { HypertextReveal } from '@/components/ui/hypertext';
 import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
+
+// Custom component for aurora text without scrambling
+const AuroraText = ({ text, delay = 0, className = '' }: { text: string; delay?: number; className?: string }) => {
+  return (
+    <motion.span
+      initial={{ opacity: 0, y: 20 }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        backgroundImage: [
+          'linear-gradient(45deg, #10b981, #3b82f6, #8b5cf6, #ec4899)',
+          'linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b)',
+          'linear-gradient(45deg, #8b5cf6, #ec4899, #f59e0b, #10b981)',
+          'linear-gradient(45deg, #ec4899, #f59e0b, #10b981, #3b82f6)',
+          'linear-gradient(45deg, #f59e0b, #10b981, #3b82f6, #8b5cf6)',
+          'linear-gradient(45deg, #10b981, #3b82f6, #8b5cf6, #ec4899)',
+        ],
+      }}
+      transition={{
+        opacity: { duration: 0.5, delay: delay, ease: 'easeOut' },
+        y: { duration: 0.5, delay: delay, ease: 'easeOut' },
+        backgroundImage: { duration: 20, repeat: Infinity, ease: 'easeInOut' },
+      }}
+      className={`bg-clip-text text-transparent ${className}`}
+      style={{
+        backgroundSize: '200% 200%',
+        animation: 'aurora 6s ease-in-out infinite',
+      }}
+    >
+      {text}
+    </motion.span>
+  );
+};
 
 export default function Home() {
   const [currentSentence, setCurrentSentence] = useState(0);
@@ -290,35 +324,7 @@ export default function Home() {
                   delay={1.5}
                   duration={0.5}
                 />
-                <motion.span
-                  animate={{
-                    backgroundImage: [
-                      'linear-gradient(45deg, #10b981, #3b82f6, #8b5cf6, #ec4899)',
-                      'linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b)',
-                      'linear-gradient(45deg, #8b5cf6, #ec4899, #f59e0b, #10b981)',
-                      'linear-gradient(45deg, #ec4899, #f59e0b, #10b981, #3b82f6)',
-                      'linear-gradient(45deg, #f59e0b, #10b981, #3b82f6, #8b5cf6)',
-                      'linear-gradient(45deg, #10b981, #3b82f6, #8b5cf6, #ec4899)',
-                    ],
-                  }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  className='bg-clip-text text-transparent'
-                  style={{
-                    backgroundSize: '200% 200%',
-                    animation: 'aurora 6s ease-in-out infinite',
-                  }}
-                >
-                  <HypertextReveal
-                    text='William Ji.'
-                    className='bg-clip-text text-transparent'
-                    delay={2}
-                    duration={1}
-                  />
-                </motion.span>
+                <AuroraText text='William Ji.' delay={2} />
               </h1>
 
               <div className='mt-4 md:mt-6 text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold flex justify-center items-center px-4'>
@@ -532,6 +538,247 @@ export default function Home() {
                   pauseOnHover={false}
                   className='w-full'
                 />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* WORK EXPERIENCE Section */}
+        <div className='w-full h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02] px-6 md:px-8 lg:px-12 xl:px-16'>
+          <div className='h-full flex items-center justify-center'>
+            <div className='flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-20 items-center lg:items-center max-w-7xl mx-auto'>
+              {/* Left Section - WORK EXPERIENCE Title */}
+              <div className='flex-shrink-0'>
+                <motion.h2
+                  className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 md:mb-3 text-center lg:text-left'
+                  style={{
+                    fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                  }}
+                  initial={{ opacity: 0, x: -100 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  WORK
+                </motion.h2>
+                <motion.h2
+                  className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-center lg:text-left'
+                  style={{
+                    fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                    color: 'transparent',
+                    WebkitTextStroke: '2px white',
+                  }}
+                  initial={{ opacity: 0, x: 100 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  EXPERIENCE
+                </motion.h2>
+              </div>
+
+              {/* Middle Section - Timeline */}
+              <div className='flex-shrink-0 relative'>
+                <div className='h-80 w-0.5 bg-neutral-800 rounded-full relative'>
+                  {/* Animated smaller line inside */}
+                  <motion.div
+                    className='absolute w-0.5 rounded-full'
+                    style={{ 
+                      height: '50px',
+                      background: 'linear-gradient(to bottom, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
+                      boxShadow: '0 0 8px rgba(245, 158, 11, 0.6)',
+                    }}
+                    animate={{
+                      y: [0, 270, 0],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  />
+                  {/* Timeline markers - equally spaced */}
+                  <div
+                    className='absolute -left-1 w-2.5 h-2.5 rounded-full shadow-lg'
+                    style={{
+                      top: 'calc(16.67% - 5px)',
+                      background: 'linear-gradient(to bottom right, #f59e0b, #ec4899)',
+                      boxShadow: '0 0 10px rgba(245, 158, 11, 0.5)',
+                    }}
+                  />
+                  <div
+                    className='absolute -left-1 w-2.5 h-2.5 rounded-full shadow-lg'
+                    style={{
+                      top: 'calc(50% - 5px)',
+                      background: 'linear-gradient(to bottom right, #8b5cf6, #3b82f6)',
+                      boxShadow: '0 0 10px rgba(139, 92, 246, 0.5)',
+                    }}
+                  />
+                  <div
+                    className='absolute -left-1 w-2.5 h-2.5 rounded-full shadow-lg'
+                    style={{
+                      top: 'calc(83.33% - 5px)',
+                      background: 'linear-gradient(to bottom right, #3b82f6, #10b981)',
+                      boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)',
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Right Section - Work Experience Cards */}
+              <div className='flex-1 space-y-8 max-w-2xl'>
+                {/* Card 1 */}
+                <motion.div
+                  className='relative'
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  <GlowingEffect
+                    disabled={false}
+                    borderWidth={1}
+                    proximity={100}
+                    spread={15}
+                    blur={0}
+                    className='rounded-lg'
+                  />
+                  <div className='flex items-center gap-4 p-4 rounded-lg bg-neutral-900/50 transition-colors relative z-10'>
+                    <div className='w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1'>
+                      <Image
+                        src='/CIBC_Mellon_logo.png'
+                        alt='CIBC Mellon Logo'
+                        width={40}
+                        height={40}
+                        className='w-full h-full object-contain'
+                      />
+                    </div>
+                    <div className='flex-1'>
+                      <h3
+                        className='text-lg font-semibold text-white mb-1'
+                        style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+                      >
+                        Financial Derivatives Specialist
+                      </h3>
+                      <p
+                        className='text-neutral-400 text-sm'
+                        style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+                      >
+                        CIBC MELLON • Jul 2025 - Present
+                      </p>
+                      <p
+                        className='text-neutral-300 text-sm mt-2 text-justify'
+                        style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+                      >
+                        Implemented and managed trade reconciliation processes while serving as a client-facing
+                        specialist, ensuring accuracy in derivative transactions and prompt resolution of trade
+                        discrepancies.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Card 2 */}
+                <motion.div
+                  className='relative'
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  <GlowingEffect
+                    disabled={false}
+                    borderWidth={1}
+                    proximity={100}
+                    spread={15}
+                    blur={0}
+                    className='rounded-lg'
+                  />
+                  <div className='flex items-center gap-4 p-4 rounded-lg bg-neutral-900/50 transition-colors relative z-10'>
+                    <div className='w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1'>
+                      <Image
+                        src='/campus_eats_logo.jpeg'
+                        alt='Campus Eats Logo'
+                        width={40}
+                        height={40}
+                        className='w-full h-full object-contain rounded'
+                      />
+                    </div>
+                    <div className='flex-1'>
+                      <h3
+                        className='text-lg font-semibold text-white mb-1'
+                        style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+                      >
+                        Co-Founder and Web Development Lead
+                      </h3>
+                      <p
+                        className='text-neutral-400 text-sm'
+                        style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+                      >
+                        CAMPUS EATS • Sep 2023 - Aug 2024
+                      </p>
+                      <p
+                        className='text-neutral-300 text-sm mt-2 text-justify'
+                        style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+                      >
+                        Co-founded and led the full-stack development and strategic growth of a student-focused food
+                        delivery platform, driving adoption through cross-functional collaboration, scalable
+                        architecture, and user-centered feature prioritization.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Card 3 */}
+                <motion.div
+                  className='relative'
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  <GlowingEffect
+                    disabled={false}
+                    borderWidth={1}
+                    proximity={100}
+                    spread={15}
+                    blur={0}
+                    className='rounded-lg'
+                  />
+                  <div className='flex items-center gap-4 p-4 rounded-lg bg-neutral-900/50 transition-colors relative z-10'>
+                    <div className='w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1'>
+                      <Image
+                        src='/CIBC_logo.png'
+                        alt='CIBC Logo'
+                        width={40}
+                        height={40}
+                        className='w-full h-full object-contain'
+                      />
+                    </div>
+                    <div className='flex-1'>
+                      <h3
+                        className='text-lg font-semibold text-white mb-1'
+                        style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+                      >
+                        Performance Test Analyst
+                      </h3>
+                      <p
+                        className='text-neutral-400 text-sm'
+                        style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+                      >
+                        CIBC • Sep 2022 - Aug 2023
+                      </p>
+                      <p
+                        className='text-neutral-300 text-sm mt-2 text-justify'
+                        style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+                      >
+                        Led performance testing and optimization initiatives across 21 API and capital markets teams,
+                        developing automated pipelines that improved test speed and reliability while enhancing system
+                        integration and API efficiency.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             </div>
           </div>
