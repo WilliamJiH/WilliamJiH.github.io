@@ -46,27 +46,17 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
               
               {/* Title Section */}
               <header className='flex-shrink-0 lg:w-auto'>
-                {/* Mobile/Small screens - stacked layout */}
+                {/* Mobile/Small screens - inline layout (same as md) */}
                 <div className='md:hidden'>
                   <motion.h2
-                    className='text-4xl sm:text-5xl font-bold text-white mb-2 text-left'
+                    className='text-4xl sm:text-5xl font-bold text-white text-center'
                     style={{
                       fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
                       transform: `translateX(${-100 + aboutSectionProgress * 100}px)`,
                       opacity: aboutSectionProgress,
                     }}
                   >
-                    <FadeInText text="ABOUT" />
-                  </motion.h2>
-                  <motion.h2
-                    className='text-4xl sm:text-5xl font-bold text-left'
-                    style={{
-                      fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
-                      transform: `translateX(${100 - aboutSectionProgress * 100}px)`,
-                      opacity: aboutSectionProgress,
-                    }}
-                  >
-                    <OutlineText text="ME" />
+                    <FadeInText text="ABOUT" /> <OutlineText text="ME" />
                   </motion.h2>
                 </div>
 

@@ -50,7 +50,7 @@ export const WorkExperienceSection = forwardRef<HTMLDivElement, SectionProps>(
             {/* Timeline and Cards Container for md screens */}
             <div className='flex flex-col md:flex-row lg:flex-row gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center md:items-center lg:items-center'>
               {/* Middle Section - Timeline */}
-              <div className='flex-shrink-0 relative'>
+              <div className='flex-shrink-0 relative hidden sm:block'>
                 <div 
                   className='h-80 w-0.5 bg-neutral-800 rounded-full relative'
                   role="img"
