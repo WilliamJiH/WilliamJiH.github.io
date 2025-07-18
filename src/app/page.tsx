@@ -26,6 +26,9 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // Scroll to top on page load/refresh
+    window.scrollTo(0, 0);
+    
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
