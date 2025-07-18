@@ -400,6 +400,7 @@ export default function Home() {
         </div>
 
         <div
+          id="about-section"
           ref={aboutSectionRef}
           className='w-full h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02] px-6 md:px-8 lg:px-12 xl:px-16'
         >
@@ -823,7 +824,7 @@ export default function Home() {
         </div>
 
         {/* PROJECTS Section */}
-        <div className='w-full min-h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02] py-20'>
+        <div id="projects-section" className='w-full min-h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02] py-20'>
           <div className='max-w-7xl mx-auto px-6 md:px-8 lg:px-12 xl:px-16'>
             {/* Section Title */}
             <motion.div
@@ -866,18 +867,59 @@ export default function Home() {
         <footer className='w-full bg-black/[0.96] border-t border-neutral-800 py-8'>
           <div className='max-w-7xl mx-auto px-6 md:px-8 lg:px-12 xl:px-16'>
             <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
-              <p 
-                className='text-neutral-400 text-sm md:text-base'
-                style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+              <motion.p 
+                className='text-sm md:text-base bg-clip-text text-transparent'
+                style={{ 
+                  fontFamily: 'var(--font-poppins), system-ui, sans-serif',
+                  backgroundImage: 'linear-gradient(45deg, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
+                  backgroundSize: '200% 200%',
+                  animation: 'aurora 6s ease-in-out infinite',
+                }}
+                animate={{
+                  backgroundImage: [
+                    'linear-gradient(45deg, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
+                    'linear-gradient(45deg, #ec4899, #8b5cf6, #3b82f6, #10b981, #f59e0b)',
+                    'linear-gradient(45deg, #8b5cf6, #3b82f6, #10b981, #f59e0b, #ec4899)',
+                    'linear-gradient(45deg, #3b82f6, #10b981, #f59e0b, #ec4899, #8b5cf6)',
+                    'linear-gradient(45deg, #10b981, #f59e0b, #ec4899, #8b5cf6, #3b82f6)',
+                    'linear-gradient(45deg, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
+                  ],
+                }}
+                transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
               >
                 Designed and Developed by William Ji
-              </p>
-              <p 
-                className='text-neutral-400 text-sm md:text-base'
-                style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+              </motion.p>
+              <motion.p 
+                className='text-sm md:text-base bg-clip-text text-transparent'
+                style={{ 
+                  fontFamily: 'var(--font-poppins), system-ui, sans-serif',
+                  backgroundImage: 'linear-gradient(45deg, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
+                  backgroundSize: '200% 200%',
+                  animation: 'aurora 6s ease-in-out infinite',
+                }}
+                animate={{
+                  backgroundImage: [
+                    'linear-gradient(45deg, #10b981, #f59e0b, #ec4899, #8b5cf6, #3b82f6)',
+                    'linear-gradient(45deg, #3b82f6, #10b981, #f59e0b, #ec4899, #8b5cf6)',
+                    'linear-gradient(45deg, #8b5cf6, #3b82f6, #10b981, #f59e0b, #ec4899)',
+                    'linear-gradient(45deg, #ec4899, #8b5cf6, #3b82f6, #10b981, #f59e0b)',
+                    'linear-gradient(45deg, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
+                    'linear-gradient(45deg, #10b981, #f59e0b, #ec4899, #8b5cf6, #3b82f6)',
+                  ],
+                }}
+                transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: 1,
+                }}
               >
                 Copyright © {new Date().getFullYear()} WJ
-              </p>
+              </motion.p>
             </div>
           </div>
         </footer>

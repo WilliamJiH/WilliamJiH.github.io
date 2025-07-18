@@ -76,21 +76,41 @@ export function MyFloatingDock() {
     }, 1000);
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ 
+      top: 0, 
+      behavior: 'smooth' 
+    });
+  };
+
   const links = [
     {
       title: 'Home',
       icon: <IconHome className='h-full w-full text-neutral-500 dark:text-neutral-300' />,
-      href: '/',
+      href: '#',
+      onClick: scrollToTop,
     },
     {
       title: 'About',
       icon: <IconUser className='h-full w-full text-neutral-500 dark:text-neutral-300' />,
-      href: '/about',
+      href: '#about',
+      onClick: () => scrollToSection('about-section'),
     },
     {
       title: 'Projects',
       icon: <IconTerminal2 className='h-full w-full text-neutral-500 dark:text-neutral-300' />,
-      href: '/projects',
+      href: '#projects',
+      onClick: () => scrollToSection('projects-section'),
     },
     {
       title: 'LinkedIn',

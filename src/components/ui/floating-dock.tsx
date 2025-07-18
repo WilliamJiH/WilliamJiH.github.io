@@ -17,7 +17,7 @@ export const FloatingDock = ({
   desktopClassName,
   mobileClassName,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string; target?: string }[];
+  items: { title: string; icon: React.ReactNode; href: string; target?: string; onClick?: () => void }[];
   desktopClassName?: string;
   mobileClassName?: string;
 }) => {
@@ -33,7 +33,7 @@ const FloatingDockMobile = ({
   items,
   className,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string; target?: string }[];
+  items: { title: string; icon: React.ReactNode; href: string; target?: string; onClick?: () => void }[];
   className?: string;
 }) => {
   const [open, setOpen] = useState(false);
@@ -62,6 +62,12 @@ const FloatingDockMobile = ({
                 <a
                   href={item.href}
                   target={item.target}
+                  onClick={(e) => {
+                    if (item.onClick) {
+                      e.preventDefault();
+                      item.onClick();
+                    }
+                  }}
                   key={item.title}
                   className='flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-900'
                 >
@@ -86,7 +92,7 @@ const FloatingDockDesktop = ({
   items,
   className,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string; target?: string }[];
+  items: { title: string; icon: React.ReactNode; href: string; target?: string; onClick?: () => void }[];
   className?: string;
 }) => {
   let mouseX = useMotionValue(Infinity);
@@ -112,12 +118,14 @@ function IconContainer({
   icon,
   href,
   target,
+  onClick,
 }: {
   mouseX: MotionValue;
   title: string;
   icon: React.ReactNode;
   href: string;
   target?: string;
+  onClick?: () => void;
 }) {
   let ref = useRef<HTMLDivElement>(null);
 
@@ -157,8 +165,15 @@ function IconContainer({
 
   const [hovered, setHovered] = useState(false);
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (onClick) {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
-    <a href={href} target={target}>
+    <a href={href} target={target} onClick={handleClick}>
       <motion.div
         ref={ref}
         style={{ width, height }}
