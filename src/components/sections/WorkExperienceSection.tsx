@@ -18,11 +18,11 @@ export const WorkExperienceSection = forwardRef<HTMLDivElement, SectionProps>(
         aria-label="Work experience section"
       >
         <div className='min-h-screen flex items-center justify-center py-12 md:py-16 lg:py-20'>
-          <div className='flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center md:items-center max-w-7xl mx-auto'>
+          <div className='flex flex-col md:flex-col lg:flex-row gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center md:items-center max-w-7xl mx-auto'>
             {/* Left Section - WORK EXPERIENCE Title */}
-            <header className='flex-shrink-0'>
+            <header className='flex-shrink-0 md:w-full lg:w-auto'>
               <motion.h2
-                className='text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 md:mb-3 text-center md:text-left'
+                className='text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 md:mb-3 text-center md:text-center lg:text-left'
                 style={{
                   fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
                 }}
@@ -34,7 +34,7 @@ export const WorkExperienceSection = forwardRef<HTMLDivElement, SectionProps>(
                 <FadeInText text="WORK" delay={0} />
               </motion.h2>
               <motion.h2
-                className='text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-center md:text-left'
+                className='text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-center md:text-center lg:text-left'
                 style={{
                   fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
                 }}
@@ -47,59 +47,61 @@ export const WorkExperienceSection = forwardRef<HTMLDivElement, SectionProps>(
               </motion.h2>
             </header>
 
-            {/* Middle Section - Timeline */}
-            <div className='flex-shrink-0 relative'>
-              <div 
-                className='h-80 w-0.5 bg-neutral-800 rounded-full relative'
-                role="img"
-                aria-label="Timeline visualization"
-              >
-                {/* Animated smaller line inside */}
-                <motion.div
-                  className='absolute w-0.5 rounded-full'
-                  style={{ 
-                    height: '50px',
-                    background: 'linear-gradient(to bottom, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
-                    boxShadow: '0 0 8px rgba(245, 158, 11, 0.6)',
-                  }}
-                  animate={{
-                    y: [0, 270, 0],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  aria-hidden="true"
-                />
-                
-                {/* Timeline markers - equally spaced */}
-                {WORK_EXPERIENCES.map((_, index) => (
-                  <div
-                    key={index}
-                    className='absolute -left-1 w-2.5 h-2.5 rounded-full shadow-lg'
-                    style={{
-                      top: `calc(${16.67 + (index * 33.33)}% - 5px)`,
-                      background: index === 0 
-                        ? 'linear-gradient(to bottom right, #f59e0b, #ec4899)'
-                        : index === 1
-                        ? 'linear-gradient(to bottom right, #8b5cf6, #3b82f6)'
-                        : 'linear-gradient(to bottom right, #3b82f6, #10b981)',
-                      boxShadow: index === 0
-                        ? '0 0 10px rgba(245, 158, 11, 0.5)'
-                        : index === 1
-                        ? '0 0 10px rgba(139, 92, 246, 0.5)'
-                        : '0 0 10px rgba(59, 130, 246, 0.5)',
+            {/* Timeline and Cards Container for md screens */}
+            <div className='flex flex-col md:flex-row lg:flex-row gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center md:items-center lg:items-center'>
+              {/* Middle Section - Timeline */}
+              <div className='flex-shrink-0 relative'>
+                <div 
+                  className='h-80 w-0.5 bg-neutral-800 rounded-full relative'
+                  role="img"
+                  aria-label="Timeline visualization"
+                >
+                  {/* Animated smaller line inside */}
+                  <motion.div
+                    className='absolute w-0.5 rounded-full'
+                    style={{ 
+                      height: '50px',
+                      background: 'linear-gradient(to bottom, #f59e0b, #ec4899, #8b5cf6, #3b82f6, #10b981)',
+                      boxShadow: '0 0 8px rgba(245, 158, 11, 0.6)',
                     }}
-                    role="img"
-                    aria-label={`Timeline marker for ${WORK_EXPERIENCES[index].company}`}
+                    animate={{
+                      y: [0, 270, 0],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                    aria-hidden="true"
                   />
-                ))}
+                  
+                  {/* Timeline markers - equally spaced */}
+                  {WORK_EXPERIENCES.map((_, index) => (
+                    <div
+                      key={index}
+                      className='absolute -left-1 w-2.5 h-2.5 rounded-full shadow-lg'
+                      style={{
+                        top: `calc(${16.67 + (index * 33.33)}% - 5px)`,
+                        background: index === 0 
+                          ? 'linear-gradient(to bottom right, #f59e0b, #ec4899)'
+                          : index === 1
+                          ? 'linear-gradient(to bottom right, #8b5cf6, #3b82f6)'
+                          : 'linear-gradient(to bottom right, #3b82f6, #10b981)',
+                        boxShadow: index === 0
+                          ? '0 0 10px rgba(245, 158, 11, 0.5)'
+                          : index === 1
+                          ? '0 0 10px rgba(139, 92, 246, 0.5)'
+                          : '0 0 10px rgba(59, 130, 246, 0.5)',
+                      }}
+                      role="img"
+                      aria-label={`Timeline marker for ${WORK_EXPERIENCES[index].company}`}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Right Section - Work Experience Cards */}
-            <div className='flex-1 space-y-8 max-w-2xl' role="list" aria-label="Work experience list">
+              {/* Right Section - Work Experience Cards */}
+              <div className='flex-1 space-y-8 max-w-2xl' role="list" aria-label="Work experience list">
               {WORK_EXPERIENCES.map((experience, index) => (
                 <motion.article
                   key={experience.id}
@@ -151,6 +153,7 @@ export const WorkExperienceSection = forwardRef<HTMLDivElement, SectionProps>(
                   </div>
                 </motion.article>
               ))}
+              </div>
             </div>
           </div>
         </div>

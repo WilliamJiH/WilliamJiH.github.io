@@ -47,7 +47,7 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
               {/* Title Section */}
               <header className='flex-shrink-0 lg:w-auto'>
                 <motion.h2
-                  className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 md:mb-3 text-center lg:text-left'
+                  className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 md:mb-3 text-center sm:text-left md:text-left lg:text-left'
                   style={{
                     fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
                     transform: `translateX(${-100 + aboutSectionProgress * 100}px)`,
@@ -57,7 +57,7 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
                   <FadeInText text="ABOUT" />
                 </motion.h2>
                 <motion.h2
-                  className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-center lg:text-left'
+                  className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-center sm:text-left md:text-left lg:text-left'
                   style={{
                     fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
                     transform: `translateX(${100 - aboutSectionProgress * 100}px)`,
