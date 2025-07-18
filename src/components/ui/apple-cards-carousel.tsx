@@ -215,6 +215,8 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleOpen}
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
         className='relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[40rem] md:w-96 dark:bg-neutral-900'
       >
         <div className='pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent' />

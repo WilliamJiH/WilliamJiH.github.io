@@ -828,7 +828,7 @@ export default function Home() {
           <div className='max-w-7xl mx-auto px-6 md:px-8 lg:px-12 xl:px-16'>
             {/* Section Title */}
             <motion.div
-              className='text-center mb-16'
+              className='text-center mb-8'
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
