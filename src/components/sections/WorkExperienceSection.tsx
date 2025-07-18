@@ -14,15 +14,15 @@ export const WorkExperienceSection = forwardRef<HTMLDivElement, SectionProps>(
       <section
         id={id}
         ref={ref}
-        className={`w-full h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02] px-6 md:px-8 lg:px-12 xl:px-16 ${className}`}
+        className={`w-full min-h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02] px-6 md:px-8 lg:px-12 xl:px-16 ${className}`}
         aria-label="Work experience section"
       >
-        <div className='h-full flex items-center justify-center'>
-          <div className='flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-20 items-center lg:items-center max-w-7xl mx-auto'>
+        <div className='min-h-screen flex items-center justify-center py-12 md:py-16 lg:py-20'>
+          <div className='flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center md:items-center max-w-7xl mx-auto'>
             {/* Left Section - WORK EXPERIENCE Title */}
             <header className='flex-shrink-0'>
               <motion.h2
-                className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 md:mb-3 text-center lg:text-left'
+                className='text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 md:mb-3 text-center md:text-left'
                 style={{
                   fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
                 }}
@@ -34,7 +34,7 @@ export const WorkExperienceSection = forwardRef<HTMLDivElement, SectionProps>(
                 <FadeInText text="WORK" delay={0} />
               </motion.h2>
               <motion.h2
-                className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-center lg:text-left'
+                className='text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-center md:text-left'
                 style={{
                   fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
                 }}
