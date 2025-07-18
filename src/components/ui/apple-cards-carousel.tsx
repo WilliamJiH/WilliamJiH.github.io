@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState, createContext, useContext } from 'react';
+import React, { useEffect, useRef, useState, createContext, useContext, useCallback } from 'react';
 import { IconArrowNarrowLeft, IconArrowNarrowRight, IconX } from '@tabler/icons-react';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'motion/react';
@@ -7,7 +7,7 @@ import Image, { ImageProps } from 'next/image';
 import { useOutsideClick } from '@/hooks/use-outside-click';
 
 interface CarouselProps {
-  items: JSX.Element[];
+  items: React.ReactElement[];
   initialScroll?: number;
 }
 
@@ -101,12 +101,11 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                 animate={{
                   opacity: 1,
                   y: 0,
-                  transition: {
-                    duration: 0.5,
-                    delay: 0.2 * index,
-                    ease: 'easeOut',
-                    once: true,
-                  },
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.2 * index,
+                  ease: 'easeOut',
                 }}
                 key={'card' + index}
                 className='rounded-3xl last:pr-[5%] md:last:pr-[33%]'
@@ -146,10 +145,10 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setOpen(false);
     onCardClose(index);
-  };
+  }, [onCardClose, index]);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
