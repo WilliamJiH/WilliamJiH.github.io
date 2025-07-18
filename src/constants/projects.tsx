@@ -3,40 +3,50 @@ import { ProjectCard } from '@/types';
 
 export const PROJECT_CARDS: ProjectCard[] = [
   {
-    src: "https://images.unsplash.com/photo-1476231682828-37e571bc172f?q=80&w=3474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Project Alpha",
-    category: "Web Development",
+    src: '/Portfolio Site.png',
+    title: 'Personal Website',
+    category: 'Web Application',
     content: (
       <div>
-        <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
-          A full-stack web application built with React and Node.js. Features include user authentication, 
-          real-time data updates, and responsive design.
+        <p
+          className='text-neutral-600 dark:text-neutral-400 text-base md:text-2xl max-w-3xl mx-auto'
+          style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+        >
+          A comprehensive personal website with animations. Built Next.js, TypeScript, and Tailwind CSS. Features
+          include a floating dock navigation, bento grid projects showcase, spotlight background effects, and typewriter
+          animations.
         </p>
       </div>
     ),
   },
   {
-    src: "https://images.unsplash.com/photo-1464457312035-3d7d0e0c058e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Project Beta",
-    category: "Mobile App",
+    src: '/Campus Eats.png',
+    title: 'Campus Eats',
+    category: 'Food Delivery Platform',
     content: (
       <div>
-        <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
-          A cross-platform mobile application developed with React Native. Includes features like offline support,
-          push notifications, and seamless user experience.
+        <p
+          className='text-neutral-600 dark:text-neutral-400 text-base md:text-2xl max-w-3xl mx-auto'
+          style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+        >
+          A student-focused food delivery platform that helped local vendors grow their business. Built with modern web
+          technologies including real-time order tracking and seamless payment integration.
         </p>
       </div>
     ),
   },
   {
-    src: "https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Project Gamma",
-    category: "Data Analytics",
+    src: '/Savi Finance.png',
+    title: 'Savi Finance',
+    category: 'Financial Platform',
     content: (
       <div>
-        <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
-          A comprehensive data analytics platform with machine learning capabilities. Built using Python,
-          TensorFlow, and modern visualization libraries.
+        <p
+          className='text-neutral-600 dark:text-neutral-400 text-base md:text-2xl max-w-3xl mx-auto'
+          style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+        >
+          A comprehensive financial platform designed to help users manage their finances efficiently. Features include
+          budgeting tools, expense tracking, and investment portfolio management.
         </p>
       </div>
     ),
