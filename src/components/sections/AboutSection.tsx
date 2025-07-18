@@ -42,34 +42,75 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
         <div className='min-h-screen flex flex-col pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16 lg:pb-20'>
           {/* About Me Content */}
           <div className='flex items-start justify-center mb-8 md:mb-10 lg:mb-12'>
-            <div className='flex flex-col md:flex-col lg:flex-row gap-8 lg:gap-8 xl:gap-12 items-start md:items-start lg:items-start'>
+            <div className='flex flex-col md:flex-col lg:flex-row gap-8 md:gap-8 lg:gap-8 xl:gap-12 items-start md:items-center lg:items-start'>
               
               {/* Title Section */}
               <header className='flex-shrink-0 lg:w-auto'>
-                <motion.h2
-                  className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 md:mb-3 text-center sm:text-left md:text-left lg:text-left'
-                  style={{
-                    fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
-                    transform: `translateX(${-100 + aboutSectionProgress * 100}px)`,
-                    opacity: aboutSectionProgress,
-                  }}
-                >
-                  <FadeInText text="ABOUT" />
-                </motion.h2>
-                <motion.h2
-                  className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-center sm:text-left md:text-left lg:text-left'
-                  style={{
-                    fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
-                    transform: `translateX(${100 - aboutSectionProgress * 100}px)`,
-                    opacity: aboutSectionProgress,
-                  }}
-                >
-                  <OutlineText text="ME" />
-                </motion.h2>
+                {/* Mobile/Small screens - stacked layout */}
+                <div className='md:hidden'>
+                  <motion.h2
+                    className='text-4xl sm:text-5xl font-bold text-white mb-2 text-left'
+                    style={{
+                      fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                      transform: `translateX(${-100 + aboutSectionProgress * 100}px)`,
+                      opacity: aboutSectionProgress,
+                    }}
+                  >
+                    <FadeInText text="ABOUT" />
+                  </motion.h2>
+                  <motion.h2
+                    className='text-4xl sm:text-5xl font-bold text-left'
+                    style={{
+                      fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                      transform: `translateX(${100 - aboutSectionProgress * 100}px)`,
+                      opacity: aboutSectionProgress,
+                    }}
+                  >
+                    <OutlineText text="ME" />
+                  </motion.h2>
+                </div>
+
+                {/* MD screens only - inline layout */}
+                <div className='hidden md:block lg:hidden'>
+                  <motion.h2
+                    className='text-6xl font-bold text-white text-center'
+                    style={{
+                      fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                      transform: `translateX(${-100 + aboutSectionProgress * 100}px)`,
+                      opacity: aboutSectionProgress,
+                    }}
+                  >
+                    <FadeInText text="ABOUT" /> <OutlineText text="ME" />
+                  </motion.h2>
+                </div>
+
+                {/* LG screens and above - stacked layout */}
+                <div className='hidden lg:block'>
+                  <motion.h2
+                    className='text-5xl xl:text-6xl font-bold text-white mb-2 lg:mb-3 text-left'
+                    style={{
+                      fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                      transform: `translateX(${-100 + aboutSectionProgress * 100}px)`,
+                      opacity: aboutSectionProgress,
+                    }}
+                  >
+                    <FadeInText text="ABOUT" />
+                  </motion.h2>
+                  <motion.h2
+                    className='text-5xl xl:text-6xl font-bold text-left'
+                    style={{
+                      fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                      transform: `translateX(${100 - aboutSectionProgress * 100}px)`,
+                      opacity: aboutSectionProgress,
+                    }}
+                  >
+                    <OutlineText text="ME" />
+                  </motion.h2>
+                </div>
               </header>
 
               {/* Avatar Section */}
-              <div className='flex-shrink-0 flex justify-center lg:justify-start items-start'>
+              <div className='w-full md:w-auto flex-shrink-0 flex justify-center md:justify-center lg:justify-start items-start'>
                 <motion.div
                   className='relative transition-opacity duration-500 ease-in-out'
                   style={{ opacity: aboutSectionProgress }}
@@ -175,10 +216,45 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
 
           {/* Skills Section */}
           <div className='flex-1 w-full'>
-            <header className='flex justify-end mb-4 lg:mb-6'>
+            {/* Mobile/Small screens - right aligned */}
+            <header className='flex justify-end mb-4 lg:mb-6 md:hidden'>
               <div className='text-right'>
                 <motion.h2
-                  className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-white'
+                  className='text-4xl sm:text-5xl font-bold text-white'
+                  style={{
+                    fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                    transform: `translateX(${100 - skillsProgress * 100}px)`,
+                    opacity: skillsProgress,
+                  }}
+                >
+                  TECH{' '}
+                  <OutlineText text="STACK" />
+                </motion.h2>
+              </div>
+            </header>
+
+            {/* MD screens only - center aligned */}
+            <header className='flex justify-center mb-4 hidden md:block lg:hidden'>
+              <div className='text-center'>
+                <motion.h2
+                  className='text-6xl font-bold text-white'
+                  style={{
+                    fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                    transform: `translateX(${100 - skillsProgress * 100}px)`,
+                    opacity: skillsProgress,
+                  }}
+                >
+                  TECH{' '}
+                  <OutlineText text="STACK" />
+                </motion.h2>
+              </div>
+            </header>
+
+            {/* LG screens and above - right aligned */}
+            <header className='flex justify-end mb-6 hidden lg:block'>
+              <div className='text-right'>
+                <motion.h2
+                  className='text-5xl xl:text-6xl font-bold text-white'
                   style={{
                     fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
                     transform: `translateX(${100 - skillsProgress * 100}px)`,
