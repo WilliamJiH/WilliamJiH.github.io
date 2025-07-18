@@ -8,6 +8,12 @@ body {
   font-family: var(--font-geist), 'Geist Sans', system-ui, sans-serif;
 }
 
+html,
+body {
+  overflow-x: clip; /* modern alternative to hidden */
+  max-width: 100%;
+}
+
 @theme inline {
   /* Configure your theme variables here */
   --font-display: var(--font-geist), 'Geist Sans', system-ui, sans-serif;
@@ -30,12 +36,12 @@ body {
   }
   100% {
     opacity: 1;
-    transform: translate(-50%,-40%) scale(1);
+    transform: translate(-50%, -40%) scale(1);
   }
 }
 
 .animate-spotlight {
-  animation: spotlight 2s ease .75s 1 forwards;
+  animation: spotlight 2s ease 0.75s 1 forwards;
 }
 
 @keyframes aurora {
@@ -84,7 +90,7 @@ body {
   25% {
     opacity: 0;
   }
-  
+
   /* Right edge - vertical */
   30% {
     top: -100px;
@@ -103,7 +109,7 @@ body {
   50% {
     opacity: 0;
   }
-  
+
   /* Bottom edge - horizontal */
   55% {
     top: calc(100vh - 1px);
@@ -122,7 +128,7 @@ body {
   75% {
     opacity: 0;
   }
-  
+
   /* Left edge - vertical */
   80% {
     top: calc(100vh + 50px);

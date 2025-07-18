@@ -9,7 +9,6 @@ import { ProjectsSection } from '@/components/sections/ProjectsSection';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollProgress, MousePosition } from '@/types';
 
-
 export default function Home() {
   const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
   const [, setScrollDirection] = useState<'down' | 'up'>('down');
@@ -21,8 +20,6 @@ export default function Home() {
   const cursorLightRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
   const aboutSectionRef = useRef<HTMLDivElement>(null);
-
-
 
   const handleScrollToNext = useCallback(() => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
@@ -49,7 +46,7 @@ export default function Home() {
       // Calculate about section scroll progress
       let aboutSectionProgress = 0;
       let skillsProgress = 0;
-      
+
       if (aboutSectionRef.current) {
         const rect = aboutSectionRef.current.getBoundingClientRect();
         const windowHeight = window.innerHeight;
@@ -104,16 +101,15 @@ export default function Home() {
 
       <LoadingWrapper>
         <HeroSection onScrollToNext={handleScrollToNext} />
-        
+
         <AboutSection ref={aboutSectionRef} scrollProgress={scrollProgress} />
-        
+
         <WorkExperienceSection />
-        
+
         <ProjectsSection />
-        
+
         <Footer />
       </LoadingWrapper>
     </>
   );
 }
-
