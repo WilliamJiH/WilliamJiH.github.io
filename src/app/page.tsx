@@ -5,6 +5,7 @@ import LoadingWrapper from '@/components/loading-wrapper';
 import { HypertextReveal } from '@/components/ui/hypertext';
 import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
+import { Carousel, Card } from '@/components/ui/apple-cards-carousel';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
@@ -207,6 +208,43 @@ export default function Home() {
     { name: 'React', icon: ReactIcon },
     { name: 'Node.js', icon: NodeIcon },
     { name: 'Next.js', icon: NextIcon },
+  ];
+
+  // Sample data for the carousel
+  const cards = [
+    {
+      src: "https://images.unsplash.com/photo-1476231682828-37e571bc172f?q=80&w=3474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "Project Alpha",
+      category: "Web Development",
+      content: <div>
+        <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
+          A full-stack web application built with React and Node.js. Features include user authentication, 
+          real-time data updates, and responsive design.
+        </p>
+      </div>,
+    },
+    {
+      src: "https://images.unsplash.com/photo-1464457312035-3d7d0e0c058e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "Project Beta",
+      category: "Mobile App",
+      content: <div>
+        <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
+          A cross-platform mobile application developed with React Native. Includes features like offline support,
+          push notifications, and seamless user experience.
+        </p>
+      </div>,
+    },
+    {
+      src: "https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "Project Gamma",
+      category: "Data Analytics",
+      content: <div>
+        <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
+          A comprehensive data analytics platform with machine learning capabilities. Built using Python,
+          TensorFlow, and modern visualization libraries.
+        </p>
+      </div>,
+    },
   ];
 
   const cycleSentences = useCallback(() => {
@@ -783,6 +821,66 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* PROJECTS Section */}
+        <div className='w-full min-h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02] py-20'>
+          <div className='max-w-7xl mx-auto px-6 md:px-8 lg:px-12 xl:px-16'>
+            {/* Section Title */}
+            <motion.div
+              className='text-center mb-16'
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <h2 
+                className='text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-white mb-4'
+                style={{ fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif' }}
+              >
+                MY{' '}
+                <span
+                  style={{
+                    color: 'transparent',
+                    WebkitTextStroke: '2px white',
+                  }}
+                >
+                  PROJECTS
+                </span>
+              </h2>
+              <p 
+                className='text-neutral-400 text-lg max-w-2xl mx-auto'
+                style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+              >
+                A showcase of my latest work and creative projects
+              </p>
+            </motion.div>
+
+            {/* Apple Cards Carousel */}
+            <Carousel items={cards.map((card, index) => (
+              <Card key={card.src} card={card} index={index} />
+            ))} />
+          </div>
+        </div>
+
+        {/* Footer */}
+        <footer className='w-full bg-black/[0.96] border-t border-neutral-800 py-8'>
+          <div className='max-w-7xl mx-auto px-6 md:px-8 lg:px-12 xl:px-16'>
+            <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
+              <p 
+                className='text-neutral-400 text-sm md:text-base'
+                style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+              >
+                Designed and Developed by William Ji
+              </p>
+              <p 
+                className='text-neutral-400 text-sm md:text-base'
+                style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
+              >
+                Copyright © {new Date().getFullYear()} WJ
+              </p>
+            </div>
+          </div>
+        </footer>
       </LoadingWrapper>
     </>
   );
