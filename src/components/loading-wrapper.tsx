@@ -14,9 +14,7 @@ export default function LoadingWrapper({ children }: { children: React.ReactNode
 
     // Show loader only if page takes longer than 100ms to render
     const loaderTimer = setTimeout(() => {
-      if (isLoading) {
-        setShowLoader(true);
-      }
+      setShowLoader(true);
     }, 100);
 
     // Check if page is fully loaded

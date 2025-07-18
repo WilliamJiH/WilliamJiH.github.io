@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'motion/react';
 import { AuroraText } from '@/components/ui/animated-text';
 import { SectionProps } from '@/types';
 

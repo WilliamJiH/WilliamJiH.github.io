@@ -48,7 +48,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     >
       {/* Beam */}
       <div className='beam rounded-full pointer-events-none' aria-hidden="true"></div>
-      <Spotlight className='-top-40 left-0 md:left-60 md:-top-20' fill='white' />
+      <Spotlight className='-top-40 left-0 md:left-60 md:-top-20' />
       
       <div className='p-4 sm:p-6 md:p-8 max-w-7xl mx-auto relative z-10 w-full'>
         <header className='text-center'>

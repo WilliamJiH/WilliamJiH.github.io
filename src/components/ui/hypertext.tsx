@@ -1,13 +1,13 @@
 'use client';
 
-import { motion } from 'motion/react';
+import { motion, MotionProps } from 'motion/react';
 import { useEffect, useState } from 'react';
 
 interface HypertextProps {
   text: string;
   className?: string;
   animationDuration?: number;
-  framerProps?: any;
+  framerProps?: Omit<MotionProps, 'children'>;
 }
 
 export const Hypertext = ({ text, className = '', animationDuration = 0.5, framerProps }: HypertextProps) => {

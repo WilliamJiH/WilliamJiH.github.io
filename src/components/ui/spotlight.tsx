@@ -5,10 +5,9 @@ import { cn } from "@/lib/utils";
 
 type SpotlightProps = {
   className?: string;
-  fill?: string;
 };
 
-export const Spotlight = ({ className, fill }: SpotlightProps) => {
+export const Spotlight = ({ className }: SpotlightProps) => {
   return (
     <svg
       className={cn(

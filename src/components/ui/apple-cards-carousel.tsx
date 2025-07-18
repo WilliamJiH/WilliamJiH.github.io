@@ -140,7 +140,16 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 export const Card = ({ card, index, layout = false }: { card: Card; index: number; layout?: boolean }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { onCardClose, currentIndex } = useContext(CarouselContext);
+  const { onCardClose } = useContext(CarouselContext);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    onCardClose(index);
+  };
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -157,18 +166,9 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [open]);
+  }, [open, handleClose]);
 
   useOutsideClick(containerRef, () => handleClose());
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    onCardClose(index);
-  };
 
   return (
     <>
@@ -240,18 +240,17 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
   );
 };
 
-export const BlurImage = ({ height, width, src, className, alt, fill, ...rest }: ImageProps & { fill?: boolean }) => {
+export const BlurImage = ({ height, width, src, className, alt, fill, ...rest }: ImageProps) => {
   const [isLoading, setLoading] = useState(true);
   return (
-    <img
-      className={cn('h-full w-full transition duration-300', isLoading ? 'blur-sm' : 'blur-0', className)}
+    <Image
+      className={cn('transition duration-300', isLoading ? 'blur-sm' : 'blur-0', className)}
       onLoad={() => setLoading(false)}
-      src={src as string}
+      src={src}
       width={width}
       height={height}
-      loading='lazy'
-      decoding='async'
-      alt={alt ? alt : 'Background of a beautiful view'}
+      fill={fill}
+      alt={alt || 'Background of a beautiful view'}
       {...rest}
     />
   );
