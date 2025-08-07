@@ -5,13 +5,19 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
 import { FadeInText, OutlineText } from '@/components/ui/animated-text';
-import { 
-  PythonIcon, 
-  GitIcon, 
-  TypeScriptIcon, 
-  ReactIcon, 
-  NodeIcon, 
-  NextIcon 
+import {
+  PythonIcon,
+  GitIcon,
+  TypeScriptIcon,
+  ReactIcon,
+  NodeIcon,
+  NextIcon,
+  AWSIcon,
+  FirebaseIcon,
+  PostmanIcon,
+  SeleniumIcon,
+  MySQLIcon,
+  CplusIcon,
 } from '@/components/icons/TechnologyIcons';
 import { Technology, ScrollProgress, SectionProps } from '@/types';
 
@@ -21,11 +27,20 @@ interface AboutSectionProps extends SectionProps {
 
 const technologies: Technology[] = [
   { name: 'Python', icon: PythonIcon },
-  { name: 'Git', icon: GitIcon },
   { name: 'TypeScript', icon: TypeScriptIcon },
+  { name: 'C++', icon: CplusIcon },
   { name: 'React', icon: ReactIcon },
-  { name: 'Node.js', icon: NodeIcon },
   { name: 'Next.js', icon: NextIcon },
+  { name: 'Node.js', icon: NodeIcon },
+];
+
+const technologies2: Technology[] = [
+  { name: 'Git', icon: GitIcon },
+  { name: 'MySQL', icon: MySQLIcon },
+  { name: 'AWS', icon: AWSIcon },
+  { name: 'Firebase', icon: FirebaseIcon },
+  { name: 'Postman', icon: PostmanIcon },
+  { name: 'Selenium', icon: SeleniumIcon },
 ];
 
 export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
@@ -37,13 +52,12 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
         id={id}
         ref={ref}
         className={`w-full min-h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02] px-6 md:px-8 lg:px-12 xl:px-16 overflow-x-hidden ${className}`}
-        aria-label="About me section"
+        aria-label='About me section'
       >
         <div className='min-h-screen flex flex-col pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16 lg:pb-20'>
           {/* About Me Content */}
           <div className='flex items-start justify-center mb-8 md:mb-10 lg:mb-12'>
             <div className='flex flex-col md:flex-col lg:flex-row gap-8 md:gap-8 lg:gap-8 xl:gap-12 items-start md:items-center lg:items-start'>
-              
               {/* Title Section */}
               <header className='flex-shrink-0 lg:w-auto'>
                 {/* Mobile/Small screens - inline layout (same as md) */}
@@ -56,7 +70,7 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
                       opacity: aboutSectionProgress,
                     }}
                   >
-                    <FadeInText text="ABOUT" /> <OutlineText text="ME" />
+                    <FadeInText text='ABOUT' /> <OutlineText text='ME' />
                   </motion.h2>
                 </div>
 
@@ -70,7 +84,7 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
                       opacity: aboutSectionProgress,
                     }}
                   >
-                    <FadeInText text="ABOUT" /> <OutlineText text="ME" />
+                    <FadeInText text='ABOUT' /> <OutlineText text='ME' />
                   </motion.h2>
                 </div>
 
@@ -84,7 +98,7 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
                       opacity: aboutSectionProgress,
                     }}
                   >
-                    <FadeInText text="ABOUT" />
+                    <FadeInText text='ABOUT' />
                   </motion.h2>
                   <motion.h2
                     className='text-5xl xl:text-6xl font-bold text-left'
@@ -94,7 +108,7 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
                       opacity: aboutSectionProgress,
                     }}
                   >
-                    <OutlineText text="ME" />
+                    <OutlineText text='ME' />
                   </motion.h2>
                 </div>
               </header>
@@ -104,7 +118,7 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
                 <motion.div
                   className='relative transition-opacity duration-500 ease-in-out'
                   style={{ opacity: aboutSectionProgress }}
-                  role="img"
+                  role='img'
                   aria-label="William Ji's avatar"
                 >
                   <Image
@@ -121,10 +135,10 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
               {/* Content Section */}
               <div className='flex-1 relative max-w-2xl'>
                 {/* Progress Bar */}
-                <div 
+                <div
                   className='absolute right-0 top-0 bottom-0 w-0.5 bg-neutral-800 rounded-full hidden lg:block'
-                  role="progressbar"
-                  aria-label="Page scroll progress"
+                  role='progressbar'
+                  aria-label='Page scroll progress'
                   aria-valuenow={Math.round(homePageProgress * 100)}
                   aria-valuemin={0}
                   aria-valuemax={100}
@@ -208,8 +222,10 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
           <div className='flex-1 w-full'>
             {/* Container matching ABOUT ME section width and alignment */}
             <div className='flex items-start justify-center'>
-              <div className='flex flex-col gap-8 md:gap-8 lg:gap-8 xl:gap-12' style={{ maxWidth: 'calc(100% - 2rem)' }}>
-                
+              <div
+                className='flex flex-col gap-8 md:gap-8 lg:gap-8 xl:gap-12'
+                style={{ maxWidth: 'calc(100% - 2rem)' }}
+              >
                 {/* Mobile/Small screens - right aligned */}
                 <header className='flex justify-end mb-4 lg:mb-6 md:hidden'>
                   <div className='text-right'>
@@ -221,8 +237,7 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
                         opacity: skillsProgress,
                       }}
                     >
-                      TECH{' '}
-                      <OutlineText text="STACK" />
+                      TECH <OutlineText text='STACK' />
                     </motion.h2>
                   </div>
                 </header>
@@ -238,8 +253,7 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
                         opacity: skillsProgress,
                       }}
                     >
-                      TECH{' '}
-                      <OutlineText text="STACK" />
+                      TECH <OutlineText text='STACK' />
                     </motion.h2>
                   </div>
                 </header>
@@ -255,14 +269,13 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
                         opacity: skillsProgress,
                       }}
                     >
-                      TECH{' '}
-                      <OutlineText text="STACK" />
+                      TECH <OutlineText text='STACK' />
                     </motion.h2>
                   </div>
                 </header>
 
                 {/* Tech Stack Marquees */}
-                <div className='w-full space-y-2' role="region" aria-label="Technology skills">
+                <div className='w-full space-y-2' role='region' aria-label='Technology skills'>
                   <InfiniteMovingCards
                     items={technologies}
                     direction='right'
@@ -271,7 +284,7 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
                     className='w-full'
                   />
                   <InfiniteMovingCards
-                    items={technologies}
+                    items={technologies2}
                     direction='left'
                     speed='fast'
                     pauseOnHover={false}
