@@ -11,33 +11,18 @@ interface HeroSectionProps extends SectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNext, className = '' }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    // Set initial window size
-    const updateWindowSize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    // Only run on client side
-    updateWindowSize();
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('resize', updateWindowSize);
-
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', updateWindowSize);
     };
   }, []);
 
-  // Animation variants for text reveal
   const letterVariants = {
     hidden: { opacity: 0, y: 50, rotateX: -90 },
     visible: (i: number) => ({
@@ -52,7 +37,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
     }),
   };
 
-  // Stagger animation for words
   const wordVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -65,42 +49,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
   };
 
   const greeting = "Hello, I'm ";
-  const name = "William Ji.";
+  const name = 'William Ji.';
   const subtitle = 'Moving fast. Breaking nothing.';
 
   return (
     <section
-      className={`h-screen w-full flex items-center justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden ${className}`}
+      className={`h-screen w-full flex items-center justify-center relative overflow-hidden bg-black ${className}`}
       aria-label='Hero section'
     >
-      {/* Animated background particles */}
-      {windowSize.width > 0 && (
-        <div className='absolute inset-0 overflow-hidden pointer-events-none'>
-          {[...Array(50)].map((_, i) => (
-            <motion.div
-              key={i}
-              className='absolute w-1 h-1 bg-white/10 rounded-full'
-              initial={{
-                x: Math.random() * windowSize.width,
-                y: Math.random() * windowSize.height,
-              }}
-              animate={{
-                y: [null, -100, windowSize.height + 100],
-              }}
-              transition={{
-                duration: Math.random() * 10 + 10,
-                repeat: Infinity,
-                ease: 'linear',
-                delay: Math.random() * 10,
-              }}
-            />
-          ))}
-        </div>
-      )}
+      {/* Background video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload='auto'
+        className='absolute inset-0 w-full h-full object-cover'
+        style={{ zIndex: 1 }}
+      >
+        <source src='/hero-video.mp4' type='video/mp4' />
+      </video>
+
+      {/* Dark overlay for contrast */}
+      <div className='absolute inset-0 bg-black/70' style={{ zIndex: 2 }} />
 
       {/* Interactive cursor glow */}
       <motion.div
-        className='absolute pointer-events-none z-0'
+        className='absolute pointer-events-none z-10'
         animate={{
           x: mousePosition.x - 200,
           y: mousePosition.y - 200,
@@ -114,11 +89,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
         <div className='w-96 h-96 bg-gradient-radial from-blue-500/10 via-purple-500/5 to-transparent rounded-full blur-xl' />
       </motion.div>
 
-      <div className='px-6 md:px-8 lg:px-12 xl:px-16 max-w-7xl mx-auto relative z-10 w-full h-full flex flex-col'>
-        {/* Main content - centered vertically */}
+      <div className='px-6 md:px-8 lg:px-12 xl:px-16 max-w-7xl mx-auto relative z-20 w-full h-full flex flex-col'>
         <div className='flex-1 flex flex-col justify-center items-center text-center'>
           <header className='mb-8'>
-            {/* Animated main greeting */}
             <motion.h1
               className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 relative cursor-pointer'
               style={{
@@ -129,7 +102,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
               initial='hidden'
               animate='visible'
             >
-              {/* Hello, I'm - with letter animation */}
               <span className='text-white'>
                 {greeting.split('').map((char, i) => (
                   <motion.span
@@ -146,15 +118,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
                   </motion.span>
                 ))}
               </span>
-              
-              {/* William Ji. - with outline text effect */}
-              <OutlineText 
-                text={name} 
-                delay={greeting.length * 0.1 + 0.2}
-              />
+              <OutlineText text={name} delay={greeting.length * 0.1 + 0.2} />
             </motion.h1>
 
-            {/* Animated subtitle with typewriter effect */}
             <motion.div
               className='text-xl sm:text-2xl md:text-3xl text-neutral-300 font-medium relative overflow-hidden'
               style={{ fontFamily: 'var(--font-poppins), system-ui, sans-serif' }}
@@ -177,7 +143,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
             </motion.div>
           </header>
 
-          {/* Brief introduction with slide-up animation */}
           <motion.div
             className='max-w-2xl mx-auto mb-16'
             initial={{ opacity: 0, y: 50 }}
@@ -192,8 +157,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
                 transition: { duration: 0.2 },
               }}
             >
-              Full-stack developer, financial derivatives specialist, and recent CS graduate from the University of
-              Toronto.
+              Full-stack developer, financial derivatives specialist, and recent CS & Stats graduate from the University
+              of Toronto.
             </motion.p>
           </motion.div>
         </div>
