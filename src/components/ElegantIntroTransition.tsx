@@ -19,18 +19,18 @@ export const ElegantIntroTransition: React.FC<ElegantIntroTransitionProps> = ({ 
     // Display for 2 seconds then start fade out
     const timer2 = setTimeout(() => {
       setPhase('fade-out');
-    }, 2600);
+    }, 2000);
 
     // Start page split after text fades out
     const timer3 = setTimeout(() => {
       setPhase('split');
-    }, 3100);
+    }, 2500);
 
     // Complete transition
     const timer4 = setTimeout(() => {
       setPhase('complete');
       onComplete();
-    }, 4100);
+    }, 3500);
 
     return () => {
       clearTimeout(timer1);

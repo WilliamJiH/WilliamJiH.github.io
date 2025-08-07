@@ -24,17 +24,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
   }, []);
 
   const letterVariants = {
-    hidden: { opacity: 0, y: 50, rotateX: -90 },
+    hidden: {
+      opacity: 0,
+      y: 100,
+      rotateX: -90,
+      scale: 0.5,
+    },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
       rotateX: 0,
+      scale: 1,
       transition: {
-        delay: i * 0.1,
-        duration: 0.8,
+        delay: i * 0.05,
+        duration: 0.6,
         ease: [0.25, 0.46, 0.45, 0.94] as const,
+        type: 'spring' as const,
+        damping: 12,
+        stiffness: 200,
       },
     }),
+    hover: {
+      y: -5,
+      scale: 1.1,
+      transition: { duration: 0.2 },
+    },
   };
 
   const wordVariants = {
@@ -67,11 +81,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
         className='absolute inset-0 w-full h-full object-cover'
         style={{ zIndex: 1 }}
       >
-        <source src='/hero-video.mp4' type='video/mp4' />
+        <source src='/hero.mp4' type='video/mp4' />
       </video>
 
       {/* Dark overlay for contrast */}
-      <div className='absolute inset-0 bg-black/70' style={{ zIndex: 2 }} />
+      <div className='absolute inset-0 bg-black/50' style={{ zIndex: 2 }} />
 
       {/* Interactive cursor glow */}
       <motion.div
@@ -108,11 +122,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
                     key={i}
                     variants={letterVariants}
                     custom={i}
-                    className='inline-block'
+                    className='inline-block cursor-pointer'
                     style={{
                       transformOrigin: 'center bottom',
                       display: char === ' ' ? 'inline' : 'inline-block',
                     }}
+                    whileHover='hover'
+                    whileTap={{ scale: 0.95 }}
                   >
                     {char === ' ' ? '\u00A0' : char}
                   </motion.span>
