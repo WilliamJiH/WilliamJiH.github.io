@@ -7,9 +7,11 @@ import { AboutSection } from '@/components/sections/AboutSection';
 import { WorkExperienceSection } from '@/components/sections/WorkExperienceSection';
 import { ProjectsSection } from '@/components/sections/ProjectsSection';
 import { Footer } from '@/components/layout/Footer';
+import { ElegantIntroTransition } from '@/components/ElegantIntroTransition';
 import { ScrollProgress, MousePosition } from '@/types';
 
 export default function Home() {
+  const [showIntro, setShowIntro] = useState(true);
   const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
   const [, setScrollDirection] = useState<'down' | 'up'>('down');
   const [scrollProgress, setScrollProgress] = useState<ScrollProgress>({
@@ -92,6 +94,13 @@ export default function Home() {
 
   return (
     <>
+      {/* Elegant Intro Transition */}
+      {showIntro && (
+        <ElegantIntroTransition 
+          onComplete={() => setShowIntro(false)} 
+        />
+      )}
+
       {/* Cursor Light Effect */}
       <div
         ref={cursorLightRef}
