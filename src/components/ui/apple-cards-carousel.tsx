@@ -16,6 +16,7 @@ type Card = {
   title: string;
   category: string;
   content: React.ReactNode;
+  titleAction?: React.ReactNode;
 };
 
 export const CarouselContext = createContext<{
@@ -200,12 +201,19 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
               >
                 {card.category}
               </motion.p>
-              <motion.p
-                layoutId={layout ? `title-${card.title}` : undefined}
-                className='mt-4 text-2xl font-semibold text-neutral-700 md:text-5xl dark:text-white'
-              >
-                {card.title}
-              </motion.p>
+              <div className='flex items-center gap-3 mt-4'>
+                <motion.p
+                  layoutId={layout ? `title-${card.title}` : undefined}
+                  className='text-2xl font-semibold text-neutral-700 md:text-5xl dark:text-white'
+                >
+                  {card.title}
+                </motion.p>
+                {card.titleAction && (
+                  <div className='flex-shrink-0'>
+                    {card.titleAction}
+                  </div>
+                )}
+              </div>
               <div className='py-10'>{card.content}</div>
             </motion.div>
           </div>

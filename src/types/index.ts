@@ -19,6 +19,7 @@ export interface ProjectCard {
   title: string;
   category: string;
   content: React.ReactNode;
+  titleAction?: React.ReactNode;
 }
 
 export interface FloatingDockItem {

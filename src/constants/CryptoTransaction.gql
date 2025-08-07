@@ -1,0 +1,63 @@
+export const cryptoTransactionSchema = gql`
+    type CryptoTransaction {
+    id: DocumentId!
+    transactionHash: String!
+    amount: Float!
+    currency: String!
+    timestamp: DateTime!
+    status: String!
+    walletAddress: String!
+    externalTransactionId: String # An identifier used by the third-party service for the transaction.
+  }
+  
+  extend type Query {
+    getCryptoTransaction(transactionId: DocumentId!): CryptoTransaction
+    listCryptoTransactions(userId: DocumentId): [CryptoTransaction]
+  }
+`
+
+export const cryptoAccountSchema = gql`
+  enum CryptoAccountType {
+    BITCOIN
+    ETHEREUM
+    LITECOIN
+    RIPPLE
+    CARDANO
+    OTHER
+  }
+  
+  # CryptoAccountBalance saves multiple snapshots(balance history) of a CryptoAccount
+  type CryptoAccountBalance{
+    id: DocumentId!
+    cryptoAccountId: DocumentId!
+    balance: Float! # This might now come directly from the third-party service
+  }
+  
+  type CryptoAccount {
+    id: DocumentId!
+    userId: DocumentId!
+    provider: String! # The third-party service provider, e.g., "Coinbase", "Binance"
+    accountType: CryptoAccountType!
+    currency: String!
+    externalAccountId: String # The account ID from the third-party service
+    createdAt: DateTime!
+    updatedAt: DateTime
+  }
+  
+  extend type Mutation {
+    addCryptoAccount(input: AddCryptoAccountInput!): CryptoAccount)
+    deleteCryptoAccount(accountId: DocumentId!): String
+  }
+  
+  input AddCryptoAccountInput {
+    uesrId: DocumentId!
+    provider: String!
+    accessToken: String!
+    accountId: String
+  }
+  
+  extend type Query {
+    getCryptoAccount(accountId: DocumentId!): CryptoAccount
+    listCryptoAccounts(userId: DocumentId): [CryptoAccount]
+  }
+`
