@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { FloatingDock } from '@/components/ui/floating-dock';
-import { IconBrandGithub, IconBrandLinkedin, IconHome, IconTerminal2, IconUser } from '@tabler/icons-react';
+import { IconBrandGithub, IconBrandLinkedin, IconHome, IconTerminal2, IconUser, IconBriefcase } from '@tabler/icons-react';
 
 export function MyFloatingDock() {
   const [isVisible, setIsVisible] = useState(false);
@@ -105,6 +105,12 @@ export function MyFloatingDock() {
       icon: <IconUser className='h-full w-full text-neutral-500 dark:text-neutral-300' />,
       href: '#about',
       onClick: () => scrollToSection('about-section'),
+    },
+    {
+      title: 'Experience',
+      icon: <IconBriefcase className='h-full w-full text-neutral-500 dark:text-neutral-300' />,
+      href: '#work-experience',
+      onClick: () => scrollToSection('work-experience-section'),
     },
     {
       title: 'Projects',
