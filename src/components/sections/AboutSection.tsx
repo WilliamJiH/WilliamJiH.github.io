@@ -206,73 +206,79 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
 
           {/* Skills Section */}
           <div className='flex-1 w-full'>
-            {/* Mobile/Small screens - right aligned */}
-            <header className='flex justify-end mb-4 lg:mb-6 md:hidden'>
-              <div className='text-right'>
-                <motion.h2
-                  className='text-4xl sm:text-5xl font-bold text-white'
-                  style={{
-                    fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
-                    transform: `translateX(${100 - skillsProgress * 100}px)`,
-                    opacity: skillsProgress,
-                  }}
-                >
-                  TECH{' '}
-                  <OutlineText text="STACK" />
-                </motion.h2>
-              </div>
-            </header>
+            {/* Container matching ABOUT ME section width and alignment */}
+            <div className='flex items-start justify-center'>
+              <div className='flex flex-col gap-8 md:gap-8 lg:gap-8 xl:gap-12' style={{ maxWidth: 'calc(100% - 2rem)' }}>
+                
+                {/* Mobile/Small screens - right aligned */}
+                <header className='flex justify-end mb-4 lg:mb-6 md:hidden'>
+                  <div className='text-right'>
+                    <motion.h2
+                      className='text-4xl sm:text-5xl font-bold text-white'
+                      style={{
+                        fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                        transform: `translateX(${100 - skillsProgress * 100}px)`,
+                        opacity: skillsProgress,
+                      }}
+                    >
+                      TECH{' '}
+                      <OutlineText text="STACK" />
+                    </motion.h2>
+                  </div>
+                </header>
 
-            {/* MD screens only - center aligned */}
-            <header className='flex justify-center mb-4 hidden md:block lg:hidden'>
-              <div className='text-center'>
-                <motion.h2
-                  className='text-6xl font-bold text-white'
-                  style={{
-                    fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
-                    transform: `translateX(${100 - skillsProgress * 100}px)`,
-                    opacity: skillsProgress,
-                  }}
-                >
-                  TECH{' '}
-                  <OutlineText text="STACK" />
-                </motion.h2>
-              </div>
-            </header>
+                {/* MD screens only - center aligned */}
+                <header className='flex justify-center mb-4 hidden md:block lg:hidden'>
+                  <div className='text-center'>
+                    <motion.h2
+                      className='text-6xl font-bold text-white'
+                      style={{
+                        fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                        transform: `translateX(${100 - skillsProgress * 100}px)`,
+                        opacity: skillsProgress,
+                      }}
+                    >
+                      TECH{' '}
+                      <OutlineText text="STACK" />
+                    </motion.h2>
+                  </div>
+                </header>
 
-            {/* LG screens and above - right aligned */}
-            <header className='flex justify-end mb-6 hidden lg:block'>
-              <div className='text-right'>
-                <motion.h2
-                  className='text-5xl xl:text-6xl font-bold text-white'
-                  style={{
-                    fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
-                    transform: `translateX(${100 - skillsProgress * 100}px)`,
-                    opacity: skillsProgress,
-                  }}
-                >
-                  TECH{' '}
-                  <OutlineText text="STACK" />
-                </motion.h2>
-              </div>
-            </header>
+                {/* LG screens and above - right aligned */}
+                <header className='flex justify-end mb-6 hidden lg:block'>
+                  <div className='text-right'>
+                    <motion.h2
+                      className='text-5xl xl:text-6xl font-bold text-white'
+                      style={{
+                        fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
+                        transform: `translateX(${100 - skillsProgress * 100}px)`,
+                        opacity: skillsProgress,
+                      }}
+                    >
+                      TECH{' '}
+                      <OutlineText text="STACK" />
+                    </motion.h2>
+                  </div>
+                </header>
 
-            {/* Tech Stack Marquees */}
-            <div className='w-full space-y-2' role="region" aria-label="Technology skills">
-              <InfiniteMovingCards
-                items={technologies}
-                direction='right'
-                speed='fast'
-                pauseOnHover={false}
-                className='w-full'
-              />
-              <InfiniteMovingCards
-                items={technologies}
-                direction='left'
-                speed='fast'
-                pauseOnHover={false}
-                className='w-full'
-              />
+                {/* Tech Stack Marquees */}
+                <div className='w-full space-y-2' role="region" aria-label="Technology skills">
+                  <InfiniteMovingCards
+                    items={technologies}
+                    direction='right'
+                    speed='fast'
+                    pauseOnHover={false}
+                    className='w-full'
+                  />
+                  <InfiniteMovingCards
+                    items={technologies}
+                    direction='left'
+                    speed='fast'
+                    pauseOnHover={false}
+                    className='w-full'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
