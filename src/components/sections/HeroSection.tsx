@@ -560,7 +560,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
               </CornerBracketButton>
               <CornerBracketButton
                 variant='filled'
-                href='mailto:jihaohua0816@gmail.com'
+                onClick={() => {
+                  const el = document.getElementById('initialize-contact');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
               >
                 Contact Me
               </CornerBracketButton>

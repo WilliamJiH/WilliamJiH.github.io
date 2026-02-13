@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 const NAV_ITEMS = [
   { label: 'CORE', sectionId: null },
-  { label: 'Experience', sectionId: 'work-experience-section' },
+  { label: 'Experience', sectionId: 'world-map' },
   { label: 'Projects', sectionId: 'projects-section' },
 ] as const;
 
@@ -20,6 +20,14 @@ export function MyFloatingDock() {
     if (!isMounted) return;
 
     const handleScroll = () => {
+      // Check if we've reached the bottom of the page
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+      
+      if (isAtBottom) {
+        setActiveSection('FOOTER');
+        return;
+      }
+
       // Determine which section is currently in view
       let current = 'CORE';
       for (const item of NAV_ITEMS) {

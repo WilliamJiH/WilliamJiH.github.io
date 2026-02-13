@@ -61,8 +61,6 @@ export interface AnimatedTextProps {
 }
 
 export interface ScrollProgress {
-  aboutSectionProgress: number;
-  skillsProgress: number;
   homePageProgress: number;
 }
 
