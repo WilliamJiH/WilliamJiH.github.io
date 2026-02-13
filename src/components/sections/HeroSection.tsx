@@ -609,26 +609,52 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 4 }}
         >
-          <div className='animate-bounce'>
-            <motion.button
-              onClick={onScrollToNext}
-              className='w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center cursor-pointer hover:border-white/60 hover:bg-white/10 transition-all duration-300 focus:outline-none'
-              aria-label='Scroll to about section'
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+          <button
+            onClick={onScrollToNext}
+            className='relative cursor-pointer focus:outline-none'
+            aria-label='Scroll to about section'
+          >
+            <svg
+              width='40'
+              height='32'
+              viewBox='0 0 40 32'
+              fill='none'
+              aria-hidden='true'
+              className='block'
+              style={{ filter: 'drop-shadow(0 0 8px rgba(0,212,255,0.2))' }}
             >
-              <svg
-                className='w-6 h-6 text-white'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                strokeWidth='2'
-                aria-hidden='true'
-              >
-                <path strokeLinecap='round' strokeLinejoin='round' d='M19 14l-7 7m0 0l-7-7m7 7V3' />
-              </svg>
-            </motion.button>
-          </div>
+              {/* top */}
+              <motion.path
+                d='M10 8 L20 16 L30 8'
+                stroke='#00d4ff'
+                strokeWidth='2.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                animate={{ opacity: [0.2, 1, 0.2] }}
+                transition={{ duration: 1.8, ease: 'easeInOut', repeat: Infinity, delay: 0 }}
+              />
+              {/* middle */}
+              <motion.path
+                d='M10 14 L20 22 L30 14'
+                stroke='#00d4ff'
+                strokeWidth='2.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                animate={{ opacity: [0.2, 1, 0.2] }}
+                transition={{ duration: 1.8, ease: 'easeInOut', repeat: Infinity, delay: 0.2 }}
+              />
+              {/* bottom */}
+              <motion.path
+                d='M10 20 L20 28 L30 20'
+                stroke='#00d4ff'
+                strokeWidth='2.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                animate={{ opacity: [0.2, 1, 0.2] }}
+                transition={{ duration: 1.8, ease: 'easeInOut', repeat: Infinity, delay: 0.4 }}
+              />
+            </svg>
+          </button>
         </motion.div>
       </div>
 
