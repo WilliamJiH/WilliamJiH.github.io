@@ -76,41 +76,6 @@ function createArcPoints(from: City, to: City, segments = 64): [number, number, 
   return pts;
 }
 
-// ── Globe wireframe grid (lat / lng lines) ─────────────────
-function GlobeGrid() {
-  const geometry = useMemo(() => {
-    const pts: number[] = [];
-    const r = GLOBE_RADIUS * 0.998;
-
-    // Latitude lines every 15°
-    for (let lat = -75; lat <= 75; lat += 15) {
-      for (let lng = -180; lng < 180; lng += 3) {
-        const a = latLngToVec3(lat, lng, r);
-        const b = latLngToVec3(lat, lng + 3, r);
-        pts.push(a.x, a.y, a.z, b.x, b.y, b.z);
-      }
-    }
-    // Longitude lines every 15°
-    for (let lng = -180; lng < 180; lng += 15) {
-      for (let lat = -75; lat < 75; lat += 3) {
-        const a = latLngToVec3(lat, lng, r);
-        const b = latLngToVec3(lat + 3, lng, r);
-        pts.push(a.x, a.y, a.z, b.x, b.y, b.z);
-      }
-    }
-
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
-    return geo;
-  }, []);
-
-  return (
-    <lineSegments geometry={geometry}>
-      <lineBasicMaterial color={COLORS.grid} transparent opacity={0.35} />
-    </lineSegments>
-  );
-}
-
 // ── Land mass: filled polygons + outlines (fetched from CDN) ──
 function LandMass() {
   const [texture, setTexture] = useState<THREE.CanvasTexture | null>(null);
