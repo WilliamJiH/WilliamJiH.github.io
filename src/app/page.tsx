@@ -8,18 +8,17 @@ import { WorkExperienceSection } from '@/components/sections/WorkExperienceSecti
 import { ProjectsSection } from '@/components/sections/ProjectsSection';
 import { Footer } from '@/components/layout/Footer';
 import { ElegantIntroTransition } from '@/components/ElegantIntroTransition';
-import { ScrollProgress, MousePosition } from '@/types';
+import { MyFloatingDock } from '@/components/floating-dock';
+import { ScrollProgress } from '@/types';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
-  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
   const [, setScrollDirection] = useState<'down' | 'up'>('down');
   const [scrollProgress, setScrollProgress] = useState<ScrollProgress>({
     aboutSectionProgress: 0,
     skillsProgress: 0,
     homePageProgress: 0,
   });
-  const cursorLightRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
   const aboutSectionRef = useRef<HTMLDivElement>(null);
 
@@ -30,10 +29,6 @@ export default function Home() {
   useEffect(() => {
     // Scroll to top on page load/refresh
     window.scrollTo(0, 0);
-
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -84,10 +79,8 @@ export default function Home() {
       });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -101,15 +94,8 @@ export default function Home() {
         />
       )}
 
-      {/* Cursor Light Effect */}
-      <div
-        ref={cursorLightRef}
-        className='cursor-light'
-        style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-        }}
-      />
+      {/* Navbar — hidden during intro */}
+      {!showIntro && <MyFloatingDock />}
 
       <LoadingWrapper>
         <HeroSection onScrollToNext={handleScrollToNext} />

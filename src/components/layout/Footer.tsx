@@ -14,7 +14,7 @@ export const Footer: React.FC<FooterProps> = ({
 }) => {
   return (
     <footer 
-      className={`w-full bg-black/[0.96] border-t border-neutral-800 py-8 ${className}`}
+      className={`w-full relative bg-black border-t border-neutral-800 py-8 ${className}`}
       role="contentinfo"
       aria-label="Site footer"
     >

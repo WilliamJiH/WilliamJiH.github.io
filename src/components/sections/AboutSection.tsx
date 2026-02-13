@@ -51,7 +51,7 @@ export const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
       <section
         id={id}
         ref={ref}
-        className={`w-full min-h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02] px-6 md:px-8 lg:px-12 xl:px-16 overflow-x-hidden ${className}`}
+        className={`w-full min-h-screen relative bg-black antialiased px-6 md:px-8 lg:px-12 xl:px-16 overflow-x-hidden ${className}`}
         aria-label='About me section'
       >
         <div className='min-h-screen flex flex-col pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16 lg:pb-20'>

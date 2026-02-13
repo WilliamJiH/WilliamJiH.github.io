@@ -13,7 +13,7 @@ export const ProjectsSection = forwardRef<HTMLDivElement, SectionProps>(
       <section
         id={id}
         ref={ref}
-        className={`w-full min-h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02] py-20 ${className}`}
+        className={`w-full min-h-screen relative bg-black antialiased py-20 ${className}`}
         aria-label="Projects showcase section"
       >
         <div className='max-w-7xl mx-auto px-6 md:px-8 lg:px-12 xl:px-16'>

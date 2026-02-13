@@ -157,17 +157,61 @@ body {
   z-index: 9999;
 }
 
-.cursor-light {
-  position: fixed;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 40%, transparent 70%);
-  border-radius: 50%;
+/* ── 2.5D perspective grid (hero-only) ── */
+.grid-perspective {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
   pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: screen;
-  transition: transform 0.15s ease-out;
-  transform: translate(-50%, -50%);
+}
+
+.grid-plane {
+  position: absolute;
+  inset: -40px;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* City labels on the same flat plane */
+.grid-labels {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* ── Respect reduced-motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  .grid-bg {
+    transition: none;
+    transform: none !important;
+  }
+
+  .grid-bg::before,
+  .grid-bg::after {
+    animation: none;
+  }
+
+  .grid-labels {
+    transition: none;
+    transform: none !important;
+  }
+
+
+  .animate-scroll {
+    animation: none;
+  }
+
+  .animate-spotlight {
+    animation: none;
+  }
+
+  .beam {
+    animation: none;
+  }
 }
 
 @keyframes borderGlow {

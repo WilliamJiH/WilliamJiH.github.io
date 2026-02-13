@@ -1,127 +1,176 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface ElegantIntroTransitionProps {
   onComplete: () => void;
 }
 
+const ACCENT = '#00d4ff';
+const ACCENT_DIM = 'rgba(0, 212, 255, 0.15)';
+const ACCENT_LABEL = 'rgba(0, 212, 255, 0.5)';
+const GLOW = 'rgba(0, 212, 255, 0.6)';
+
+const LOAD_DURATION = 2800; // ms 0 → 100 %
+const EXIT_DELAY = 350; // pause at 100 %
+const EXIT_DURATION = 700; // fade-out
+
+const BAR_HEIGHTS = [0.35, 0.55, 0.75, 1, 0.6]; // normalised signal bar heights
+
 export const ElegantIntroTransition: React.FC<ElegantIntroTransitionProps> = ({ onComplete }) => {
-  const [phase, setPhase] = useState<'fade-in' | 'display' | 'fade-out' | 'split' | 'complete'>('fade-in');
+  const [progress, setProgress] = useState(0);
+  const [phase, setPhase] = useState<'loading' | 'exit' | 'complete'>('loading');
+  const startRef = useRef(0);
+  const rafRef = useRef(0);
+
+  // Check reduced-motion preference
+  const prefersReducedMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const finish = useCallback(() => {
+    setPhase('complete');
+    onComplete();
+  }, [onComplete]);
 
   useEffect(() => {
-    // Fade in text
-    const timer1 = setTimeout(() => {
-      setPhase('display');
-    }, 600);
+    // Skip animation entirely for reduced-motion users
+    if (prefersReducedMotion) {
+      setProgress(100);
+      finish();
+      return;
+    }
 
-    // Display for 2 seconds then start fade out
-    const timer2 = setTimeout(() => {
-      setPhase('fade-out');
-    }, 2000);
+    startRef.current = performance.now();
 
-    // Start page split after text fades out
-    const timer3 = setTimeout(() => {
-      setPhase('split');
-    }, 2500);
+    const tick = (now: number) => {
+      const t = Math.min((now - startRef.current) / LOAD_DURATION, 1);
+      // Ease-out cubic for a natural deceleration
+      const eased = 1 - Math.pow(1 - t, 3);
+      setProgress(Math.round(eased * 100));
 
-    // Complete transition
-    const timer4 = setTimeout(() => {
-      setPhase('complete');
-      onComplete();
-    }, 3500);
-
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      clearTimeout(timer4);
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        setTimeout(() => setPhase('exit'), EXIT_DELAY);
+        setTimeout(finish, EXIT_DELAY + EXIT_DURATION);
+      }
     };
-  }, [onComplete]);
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [prefersReducedMotion, finish]);
+
+  if (phase === 'complete') return null;
 
   return (
     <AnimatePresence>
-      {phase !== 'complete' && (
-        <>
-          {/* White Background - disappears when split starts */}
-          <motion.div
-            className='fixed inset-0 z-40 bg-white'
-            initial={{ opacity: 1 }}
-            animate={{ opacity: phase === 'split' ? 0 : 1 }}
-            transition={{ duration: 0.3 }}
-          />
+      {(
+        <motion.div
+          className='fixed inset-0 z-50 flex flex-col select-none'
+          initial={{ opacity: 1 }}
+          animate={{ opacity: phase === 'exit' ? 0 : 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: EXIT_DURATION / 1000, ease: 'easeInOut' }}
+          style={{
+            backgroundColor: '#050508',
+            backgroundImage: [
+              `linear-gradient(rgba(0,212,255,0.035) 1px, transparent 1px)`,
+              `linear-gradient(90deg, rgba(0,212,255,0.035) 1px, transparent 1px)`,
+            ].join(','),
+            backgroundSize: '48px 48px',
+          }}
+          aria-live='polite'
+          aria-label={`Loading ${progress}%`}
+        >
+          {/* Spacer pushes content to the bottom */}
+          <div className='flex-1' />
 
-          {/* Centered Text */}
-          <motion.div
-            className='fixed inset-0 z-50 flex items-center justify-center pointer-events-none'
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: phase === 'fade-in' || phase === 'display' ? 1 : 0,
-            }}
-            transition={{
-              duration: phase === 'fade-in' ? 0.6 : 0.5,
-              ease: 'easeOut',
-            }}
-          >
-            <motion.h1
-              className='text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[8rem] font-bold tracking-tight text-black'
-              style={{
-                fontFamily: 'var(--font-geist), Geist Sans, system-ui, sans-serif',
-              }}
-              initial={{
-                opacity: 0,
-                y: 20,
-                scale: 0.9,
-              }}
-              animate={
-                phase === 'fade-in' || phase === 'display'
-                  ? {
-                      opacity: 1,
-                      y: 0,
-                      scale: 1,
-                    }
-                  : {
-                      opacity: 0,
-                      y: -10,
-                      scale: 0.95,
-                    }
-              }
-              transition={{
-                duration: phase === 'fade-in' ? 0.8 : 0.4,
-                ease: 'easeOut',
-              }}
+          {/* ── Bottom HUD ── */}
+          <div className='px-6 sm:px-8 md:px-12 lg:px-16 pb-8 sm:pb-10 md:pb-12'>
+            {/* Percentage + label row */}
+            <div className='flex items-end justify-between mb-5 md:mb-6'>
+              {/* Left: percentage counter */}
+              <div className='flex items-baseline gap-0.5'>
+                <span
+                  className='text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tabular-nums leading-none'
+                  style={{
+                    color: ACCENT,
+                    fontFamily: 'var(--font-geist), system-ui, monospace',
+                    textShadow: `0 0 30px ${GLOW}, 0 0 60px rgba(0,212,255,0.25)`,
+                  }}
+                >
+                  {progress}
+                </span>
+                <span
+                  className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-none'
+                  style={{
+                    color: ACCENT,
+                    fontFamily: 'var(--font-geist), system-ui, monospace',
+                  }}
+                >
+                  %
+                </span>
+              </div>
+
+              {/* Right: label + signal bars */}
+              <div className='flex flex-col items-end gap-2'>
+                <span
+                  className='text-[10px] md:text-xs tracking-[0.25em] uppercase hidden sm:block'
+                  style={{
+                    color: ACCENT_LABEL,
+                    fontFamily: 'var(--font-geist), system-ui, monospace',
+                  }}
+                >
+                  Data Stream Bandwidth
+                </span>
+
+                {/* Signal bars */}
+                <div className='flex items-end gap-[3px]'>
+                  {BAR_HEIGHTS.map((h, i) => {
+                    const lit = progress >= (i + 1) * 20;
+                    return (
+                      <motion.div
+                        key={i}
+                        className='w-[4px] md:w-[5px] rounded-[1px]'
+                        style={{
+                          height: `${h * 28}px`,
+                          backgroundColor: lit ? ACCENT : ACCENT_DIM,
+                          boxShadow: lit ? `0 0 6px ${GLOW}` : 'none',
+                          transition: 'background-color 0.25s ease, box-shadow 0.25s ease',
+                        }}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.15 + i * 0.08, duration: 0.3 }}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* ── Progress bar ── */}
+            <div
+              className='relative w-full h-[3px] rounded-full overflow-hidden'
+              role='progressbar'
+              aria-valuenow={progress}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              style={{ backgroundColor: ACCENT_DIM }}
             >
-              William Ji
-            </motion.h1>
-          </motion.div>
-
-          {/* Left Half - always present, slides out left during split */}
-          <motion.div
-            className='fixed top-0 left-0 w-1/2 h-full z-45 bg-white'
-            initial={{ x: 0 }}
-            animate={{
-              x: phase === 'split' ? '-100%' : 0,
-            }}
-            transition={{
-              duration: 1,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-          />
-
-          {/* Right Half - always present, slides out right during split */}
-          <motion.div
-            className='fixed top-0 right-0 w-1/2 h-full z-45 bg-white'
-            initial={{ x: 0 }}
-            animate={{
-              x: phase === 'split' ? '100%' : 0,
-            }}
-            transition={{
-              duration: 1,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-          />
-        </>
+              <div
+                className='absolute inset-y-0 left-0 rounded-full'
+                style={{
+                  width: `${progress}%`,
+                  background: `linear-gradient(90deg, ${ACCENT}, #00e5ff)`,
+                  boxShadow: `0 0 12px ${GLOW}, 0 0 4px rgba(0,212,255,0.4)`,
+                  transition: 'width 0.08s linear',
+                }}
+              />
+            </div>
+          </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );

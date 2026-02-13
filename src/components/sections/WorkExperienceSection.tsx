@@ -14,7 +14,7 @@ export const WorkExperienceSection = forwardRef<HTMLDivElement, SectionProps>(
       <section
         id={id}
         ref={ref}
-        className={`w-full min-h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02] px-6 md:px-8 lg:px-12 xl:px-16 ${className}`}
+        className={`w-full min-h-screen relative bg-black antialiased px-6 md:px-8 lg:px-12 xl:px-16 ${className}`}
         aria-label="Work experience section"
       >
         <div className='min-h-screen flex items-center justify-center py-12 md:py-16 lg:py-20'>
