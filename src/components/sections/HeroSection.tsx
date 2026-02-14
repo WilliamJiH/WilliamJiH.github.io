@@ -72,7 +72,8 @@ const StatItem: React.FC<{
         className='text-[10px] sm:text-xs tracking-[0.15em] uppercase text-neutral-500'
         style={{ fontFamily: 'var(--font-brandon), system-ui, sans-serif' }}
       >
-        {label}
+        <span className="hidden sm:inline">{label}</span>
+        <span className="sm:hidden">{label === 'AI Tutorials' ? 'Tutorials' : label}</span>
       </span>
     </motion.div>
   );
@@ -254,7 +255,17 @@ const SystemIdTag: React.FC<{ startDelay?: number }> = ({ startDelay = 0 }) => {
 
 // ── Hardware acceleration diagnostic ──
 const HardwareDiagnostic: React.FC = () => {
+  // Hide on very small devices
+  const [isSmall, setIsSmall] = useState(false);
   const [enabled, setEnabled] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 390px)');
+    const update = () => setIsSmall(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => {
     try {
@@ -278,7 +289,7 @@ const HardwareDiagnostic: React.FC = () => {
     }
   }, []);
 
-  if (enabled === null) return null;
+  if (isSmall || enabled === null) return null;
 
   return (
     <motion.div
@@ -530,7 +541,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ children, onScrollToNe
 
       {/* Bottom-right stamp */}
       <motion.div
-        className='absolute bottom-8 right-8 z-10 text-right select-none'
+        className='absolute bottom-8 right-8 z-10 text-right select-none hidden sm:block'
         style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

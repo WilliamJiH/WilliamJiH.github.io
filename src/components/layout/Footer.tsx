@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
   }, [terminalText, isTyping]);
 
   return (
-    <footer id="initialize-contact" className="w-full bg-[#050b10] border-t border-[#00d4ff]/10 py-6 md:py-8 lg:py-12 xl:py-16 px-6 md:px-8 lg:px-12 xl:px-16 overflow-hidden">
+    <footer id="initialize-contact" className="w-full bg-[#050b10] border-t border-[#00d4ff]/10 pt-6 pb-20 md:py-8 lg:py-12 xl:py-16 px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
           
@@ -101,14 +101,14 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Right: Terminal UI */}
-          <div className="relative group hidden md:block">
+          <div className="relative group block">
             <div className="absolute -inset-1 bg-[#00d4ff]/10 blur opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-            <div className="relative bg-black border border-[#00d4ff]/20 p-6 font-mono text-xs md:text-sm min-h-[160px]">
+            <div className="relative bg-black border border-[#00d4ff]/20 p-4 md:p-6 font-mono text-[12px] md:text-sm min-h-[160px]">
               <div className="flex gap-1.5 mb-4">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
-                <span className="ml-2 text-neutral-600 uppercase tracking-widest text-[10px]">TERMINAL - bash</span>
+                <span className="ml-2 text-neutral-600 uppercase tracking-widest text-[12px]">TERMINAL - bash</span>
               </div>
               <div className="space-y-2">
                 <p className="text-neutral-400">guest@portfolio:~$ <span className="text-white">ping -c 1 user@contact</span></p>
