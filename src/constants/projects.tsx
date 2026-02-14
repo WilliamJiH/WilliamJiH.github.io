@@ -11,6 +11,7 @@ export const PROJECT_CARDS: ProjectCard[] = [
     src: '/Portfolio Site.png',
     title: 'Personal Website',
     category: 'Web Application',
+    shortDescription: 'A high-performance personal portfolio built with Next.js, TypeScript, and Framer Motion, featuring immersive animations and interactive HUD elements.',
     titleAction: (
       <a
         href='https://github.com/WilliamJiH/WilliamJiH.github.io'
@@ -61,6 +62,7 @@ export const PROJECT_CARDS: ProjectCard[] = [
     src: '/Campus Eats.png',
     title: 'Campus Eats',
     category: 'Food Delivery Platform',
+    shortDescription: 'A student-led startup transforming campus dining with a centralized delivery system, mobile ordering, and dynamic discount mapping.',
     titleAction: (
       <a
         href='https://github.com/CampusEatsUofT'
@@ -108,6 +110,7 @@ export const PROJECT_CARDS: ProjectCard[] = [
     src: '/Savi Finance.png',
     title: 'Savi Finance',
     category: 'Financial Platform',
+    shortDescription: 'A comprehensive wealth management platform enabling users to split expenses, track budgets, and manage multi-chain crypto assets in real-time.',
     titleAction: (
       <a
         href='https://github.com/cheapreats/'

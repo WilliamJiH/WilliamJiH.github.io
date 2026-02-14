@@ -18,6 +18,7 @@ export interface ProjectCard {
   src: string;
   title: string;
   category: string;
+  shortDescription?: string;
   content: React.ReactNode;
   titleAction?: React.ReactNode;
 }

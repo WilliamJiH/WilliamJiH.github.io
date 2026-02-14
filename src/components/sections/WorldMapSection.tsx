@@ -34,7 +34,7 @@ const CITY_SPECS: Record<string, any[]> = {
       nodeId: 'NODE_04',
       role: 'Student Intern',
       company: 'Greaves West & Ayre',
-      duration: '2023.01',
+      duration: '2015.07',
       directive: 'Experienced in most financial, business departments and spending time as a proactive IT supporter. Responsible for import and sort data using Xero, Sage, while giving quality advice to our clients.'
     }
   ],
@@ -311,7 +311,7 @@ export const WorldMapSection: React.FC = () => {
   return (
     <section
       id="world-map"
-      className="w-full bg-black pt-12 pb-24 px-6 md:px-8 lg:px-12 xl:px-16 flex flex-col items-center gap-8 scroll-mt-16 relative"
+      className="w-full bg-black pt-12 pb-12 px-6 md:px-8 lg:px-12 xl:px-16 flex flex-col items-center gap-8 scroll-mt-16 relative"
     >
       <div className="max-w-7xl mx-auto w-full flex flex-col items-center">
         <div className="text-center leading-none mb-4 select-none">
