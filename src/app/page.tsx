@@ -1,6 +1,5 @@
 'use client';
 
-import LoadingWrapper from '@/components/loading-wrapper';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { TechStackSection } from '@/components/sections/TechStackSection';
@@ -63,17 +62,15 @@ export default function Home() {
       {/* Navbar — hidden during intro */}
       {!showIntro && <MyFloatingDock />}
 
-      <LoadingWrapper>
-        <HeroSection onScrollToNext={handleScrollToNext} />
+      <HeroSection onScrollToNext={handleScrollToNext} />
 
-        <TechStackSection />
+      <TechStackSection />
 
-        <WorldMapSection />
+      <WorldMapSection />
 
-        <ProjectsSection />
+      <ProjectsSection />
 
-        <Footer />
-      </LoadingWrapper>
+      <Footer />
     </>
   );
 }
