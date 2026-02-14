@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
+import { useClickSound } from '@/hooks/use-click-sound';
 
 interface CornerBracketButtonProps {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ export const CornerBracketButton: React.FC<CornerBracketButtonProps> = ({
   href,
   className = ''
 }) => {
+  const playClick = useClickSound(0.2);
   const [hovered, setHovered] = useState(false);
   const isOutline = variant === 'outline';
   const bracketColor = isOutline ? 'rgba(255,255,255,0.7)' : 'rgba(0,212,255,0.85)';
@@ -116,6 +118,11 @@ export const CornerBracketButton: React.FC<CornerBracketButtonProps> = ({
     ...(isOutline ? {} : { backgroundColor: 'rgba(0,35,45,0.95)' }),
   };
 
+  const handleClick = (e: React.MouseEvent) => {
+    playClick();
+    if (onClick) onClick();
+  };
+
   if (href) {
     return (
       <motion.a
@@ -123,6 +130,7 @@ export const CornerBracketButton: React.FC<CornerBracketButtonProps> = ({
         className={baseClass}
         style={btnStyle}
         whileTap={{ scale: 0.97 }}
+        onClick={playClick}
         {...handlers}
       >
         {inner}
@@ -132,7 +140,7 @@ export const CornerBracketButton: React.FC<CornerBracketButtonProps> = ({
 
   return (
     <motion.button
-      onClick={onClick}
+      onClick={handleClick}
       className={baseClass}
       style={btnStyle}
       whileTap={{ scale: 0.97 }}

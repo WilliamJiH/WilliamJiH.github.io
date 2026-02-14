@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { X } from 'lucide-react';
+import { useClickSound } from '@/hooks/use-click-sound';
 
 export const Modal = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false);
@@ -32,10 +33,14 @@ export const ModalTrigger = ({
   className?: string;
 }) => {
   const { setOpen } = React.useContext(ModalContext);
+  const playClick = useClickSound(0.12);
   return (
     <div
       className={cn('relative cursor-pointer', className)}
-      onClick={() => setOpen(true)}
+      onClick={() => {
+        playClick();
+        setOpen(true);
+      }}
     >
       {children}
     </div>
@@ -51,6 +56,7 @@ export const ModalBody = ({
 }) => {
   const { open, setOpen } = React.useContext(ModalContext);
   const [mounted, setMounted] = useState(false);
+  const playClick = useClickSound(0.2);
 
   useEffect(() => {
     setMounted(true);
@@ -93,7 +99,9 @@ export const ModalBody = ({
             )}
           >
             <button
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false);
+              }}
               className="absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors z-10"
             >
               <X size={24} />
